@@ -14,13 +14,13 @@ router.get('/', (req, res, next) => {
                     quantidade: result.length,
                     produtos: result.map(prod => {
                         return {
-                            id_produtos: prod.id_produtos,
+                            id_produto: prod.id_produto,
                             nome_produto: prod.nome_produto,
                             preco_produto: prod.preco_produto,
                             request: {
                                 tipo: 'GET',
                                 descicao: 'Retorna os detalhes de um produto especifico',
-                                url: 'http://localhost:3000/produtos/' + prod.id_produtos
+                                url: 'http://localhost:3000/produtos/' + prod.id_produto
                             }
                         }
                     })
@@ -44,7 +44,7 @@ router.post('/', (req, res, next ) => {
                 const response = {
                     mensagem: 'Produto inserido com sucesso!!',
                     produtoCriado: {
-                        id_produtos: result.insertId,
+                        id_produto: result.insertId,
                         nome_produto: req.body.nome_produto,
                         preco_produto: req.body.preco_produto,
                         request: {
@@ -61,12 +61,12 @@ router.post('/', (req, res, next ) => {
 });
 
 // Retona os dados de 1 produto
-router.get('/:id_produtos', (req, res, next) => {
+router.get('/:id_produto', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         if(error){ return res.status(500).send({error: error})}
         conn.query(
-            'SELECT * FROM produtos WHERE id_produtos = ?;',
-            [req.params.id_produtos],
+            'SELECT * FROM produtos WHERE id_produto = ?;',
+            [req.params.id_produto],
             (error, result, fields) => {
                 if(error){ return res.status(500).send({error: error})}
                 if(result.length == 0){
@@ -76,7 +76,7 @@ router.get('/:id_produtos', (req, res, next) => {
                 }
                 const response = {
                     produto: {
-                        id_produtos: result[0].id_produtos,
+                        id_produto: result[0].id_produto,
                         nome_produto: result[0].nome_produto,
                         preco_produto: result[0].preco_produto,
                         request: {
@@ -100,21 +100,21 @@ router.patch('/', (req, res, next ) => {
             `UPDATE produtos
                 SET nome_produto = ?,
                     preco_produto = ?
-                WHERE id_produtos = ?`,
-            [req.body.nome_produto, req.body.preco_produto, req.body.id_produtos],
+                WHERE id_produto = ?`,
+            [req.body.nome_produto, req.body.preco_produto, req.body.id_produto],
             (error, result, field) => {
                 conn.release();
                 if(error){ return res.status(500).send({error: error})}
                 const response = {
                     mensagem: 'Produto atualizado com sucesso!!',
                     produtoAtualizado: {
-                        id_produtos: req.body.insertId,
+                        id_produto: req.body.insertId,
                         nome_produto: req.body.nome_produto,
                         preco_produto: req.body.preco_produto,
                         request: {
                             tipo: 'GET',
                             descicao: 'Retorna os detalhes de um produto especifico',
-                            url: 'http://localhost:3000/produtos/' + req.body.id_produtos
+                            url: 'http://localhost:3000/produtos/' + req.body.id_produto
                         }
                     }
                 }
@@ -129,7 +129,7 @@ router.delete('/', (req, res, next ) => {
     mysql.getConnection((error, conn) => {
         if(error){ return res.status(500).send({error: error})}
         conn.query(
-            'DELETE FROM produtos WHERE id_produtos = ?', [req.body.id_produtos],
+            'DELETE FROM produtos WHERE id_produto = ?', [req.body.id_produto],
             (error, result, field) => {
                 conn.release();
                 if(error){ return res.status(500).send({error: error})}
