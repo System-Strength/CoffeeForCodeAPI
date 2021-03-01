@@ -2,17 +2,16 @@
 -- Generated: 2021-02-28 23:20
 -- Model: New Model
 -- Version: 1.0
--- Project: Name of the project
+-- Project: RestAPI
 -- Author: Kaua Vitorio
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+/*------------ Create Database ------------*/
 create database `bdecommerce`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
-use bdecommerce;
-drop database bdecommerce;
 
+-- Use DataBase
+use bdecommerce;
+
+/*	----- Create produtos table  -----  */
 CREATE TABLE `produtos` (
   `id_produto` INT(11) NOT NULL AUTO_INCREMENT,
   `nome_produto` VARCHAR(45) NOT NULL,
@@ -21,6 +20,7 @@ CREATE TABLE `produtos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/*	----- Create pedidos table  -----  */
 CREATE TABLE `pedidos` (
   `id_pedido` INT(11) NOT NULL AUTO_INCREMENT,
   `id_produto` INT(11) NOT NULL,
@@ -35,11 +35,30 @@ CREATE TABLE `pedidos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+alter  table produtos
+add column imagem_produto varchar(500);
+
 /********************************************************/
-select * from produtos;
 
 insert into produtos(nome_produto, preco_produto)
-values ('Harry Potter', 99.60)
+values ('Harry Potter', 99.60);
+
+/************** INNER JOI Pedidos-Produtos ******************/
+SELECT pedidos.id_pedido,
+	   pedidos.quantidade,
+	   produtos.id_produto,
+	   produtos.nome_produto,
+	   produtos.preco_produto
+	FROM pedidos
+INNER JOIN produtos
+	ON produtos.id_produto = pedidos.id_produto;
+/************** END INNER JOI Pedidos-Produtos ******************/
+
+describe produtos;
+
+/* ---- Select Tabel ---- */
+select * from pedidos;
+select * from produtos;
+
+
+
