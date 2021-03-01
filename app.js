@@ -24,6 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//  Routes
 app.use('/produtos', rotaProduto);
 app.use('/pedidos', rotaPedido);
 
