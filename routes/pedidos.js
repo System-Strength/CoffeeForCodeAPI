@@ -76,8 +76,8 @@ router.post('/', (req, res, next ) => {
                     return res.status(201).send(response);
             }
         )
-        })
-    })
+        });
+    });
 });
 
 // Retona os dados de 1 pedido
