@@ -40,6 +40,19 @@ add column imagem_produto varchar(500);
 
 /********************************************************/
 
+/*	----- Create user table  -----  */
+create table usuarios (
+	id_usuario integer not null primary key auto_increment,
+    email VARCHAR(120) unique NOT NULL,
+    senha VARCHAR(120) NOT NULL
+);
+
+ALTER TABLE usuarios ADD UNIQUE (email);
+ALTER TABLE usuarios MODIFY COLUMN email VARCHAR(120) NOT NULL;
+ALTER TABLE usuarios MODIFY COLUMN senha VARCHAR(120) NOT NULL;
+describe usuarios;
+
+
 insert into produtos(nome_produto, preco_produto)
 values ('Harry Potter', 99.60);
 
@@ -59,6 +72,10 @@ describe produtos;
 /* ---- Select Tabel ---- */
 select * from pedidos;
 select * from produtos;
+select * from usuarios;
+
+INSERT INTO produtos(nome_produto, preco_produto, imagem_produto) 
+VALUES ("Test pao",10,"https://")
 
 
 
