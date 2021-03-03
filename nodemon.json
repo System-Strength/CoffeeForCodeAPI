@@ -1,7 +1,7 @@
 {
     "env" : {
         "MYSQL_USER" : "b81a3ec0f97eb9",
-        "MYSQL_PASSWORD" : "b81a3ec0f97eb9",
+        "MYSQL_PASSWORD" : "366a43c3",
         "MYSQL_DATABASE" : "heroku_b1940cca2c26944",
         "MYSQL_HOST" : "us-cdbr-east-03.cleardb.com",
         "MYSQL_PORT" : 3306,
