@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 //  Routes
 app.get('/', async (request, response) => {
-    response.redirect(process.env.URL_API + 'Page/index.html')
+    response.redirect(process.env.URL_API + 'Page/')
   });
 app.use('/produtos', rotaProduto);
 app.use('/pedidos', rotaPedido);
