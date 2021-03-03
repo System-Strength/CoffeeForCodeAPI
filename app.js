@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 //  Routes
 app.get('/', async (request, response) => {
-    response.redirect(process.env.URL_API + 'Page/')
+    response.redirect('https://www.kauavitorio.com/systemstrength')
   });
 app.use('/produtos', rotaProduto);
 app.use('/pedidos', rotaPedido);
