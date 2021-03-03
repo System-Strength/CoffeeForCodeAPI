@@ -5,11 +5,10 @@
 -- Project: RestAPI
 -- Author: Kaua Vitorio
 
-/*------------ Create Database ------------*/
 create database `bdecommerce`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
 
 -- Use DataBase
-use bdecommerce;
+use heroku_b1940cca2c26944;
 
 /*	----- Create produtos table  -----  */
 CREATE TABLE `produtos` (
@@ -26,10 +25,10 @@ CREATE TABLE `pedidos` (
   `id_produto` INT(11) NOT NULL,
   `quantidade` SMALLINT(6) NOT NULL,
   PRIMARY KEY (`id_pedido`),
-  INDEX `fk_pedidos_produtos_idx` (`id_produto` ASC) VISIBLE,
+  INDEX `fk_pedidos_produtos_idx` (`id_produto` ASC),
   CONSTRAINT `fk_pedidos_produtos`
     FOREIGN KEY (`id_produto`)
-    REFERENCES `bdecommerce`.`produtos` (`id_produto`)
+    REFERENCES `heroku_b1940cca2c26944`.`produtos` (`id_produto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
