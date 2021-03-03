@@ -28,8 +28,8 @@ app.use((req, res, next) => {
 
 //  Routes
 app.get('/', async (request, response) => {
-    response.redirect('https://www.kauavitorio.com/systemstrength')
-  });
+    response.redirect('https://www.kauavitorio.com/systemstrength/api/')
+});
 app.use('/produtos', rotaProduto);
 app.use('/pedidos', rotaPedido);
 app.use('/usuarios', rotaUsuario);
