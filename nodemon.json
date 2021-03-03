@@ -6,6 +6,7 @@
         "MYSQL_HOST" : "localhost",
         "MYSQL_PORT" : 3306,
 
-        "JWT_KEY" : "secretsystemapi"
+        "JWT_KEY" : "secretsystemapi",
+        "URL_API" : "apisystemstrength.herokuapp.com"
     }
 }
