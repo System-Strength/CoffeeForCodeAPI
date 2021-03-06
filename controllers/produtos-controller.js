@@ -19,7 +19,7 @@ exports.getProdutos = (req, res, next) => {
                             request: {
                                 tipo: 'GET',
                                 descicao: 'Retorna os detalhes de um produto especifico',
-                                url: process.env.URL_API + '/produtos/' + prod.id_produto
+                                url: process.env.URL_API + '/produtos' + prod.id_produto
                             }
                         }
                     })
@@ -39,7 +39,7 @@ exports.postProduto = (req, res, next ) => {
             [
                 req.body.nome_produto,
                 req.body.preco_produto,
-                req.file.patch
+                req.file.path,
             ],
             (error, result, field) => {
                 conn.release();
@@ -54,7 +54,7 @@ exports.postProduto = (req, res, next ) => {
                         request: {
                             tipo: 'GET',
                             descicao: 'Retorna todos os produtos',
-                            url: process.env.URL_API + '/produtos'
+                            url: process.env.URL_API + 'produtos'
                         }
                     }
                 }
