@@ -37,6 +37,14 @@ router.post('/', login.obrigatorio,
                         upload.single('imagem_produto'),
                             ProdutosController.postProduto );
 
+//  Images
+router.post('/:id_produto/imagem', login.obrigatorio, 
+                                        upload.single('imagem_produto'),
+                                            ProdutosController.postImagem)
+
+//  Images 
+router.get('/:id_produto/imagens', ProdutosController.getImagens)
+
 // Retona os dados de 1 produto
 router.get('/:id_produto', 
                             ProdutosController.getUmProduto);

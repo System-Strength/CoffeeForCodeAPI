@@ -9,6 +9,7 @@ create database `bdecommerce`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_
 
 -- Use DataBase
 use heroku_b1940cca2c26944;
+use bdecommerce;
 
 /*	----- Create produtos table  -----  */
 CREATE TABLE `produtos` (
@@ -72,9 +73,17 @@ describe produtos;
 select * from pedidos;
 select * from produtos;
 select * from usuarios;
+show tables;
 
 INSERT INTO produtos(nome_produto, preco_produto, imagem_produto) 
-VALUES ("Test pao",10,"https://")
+VALUES ("Test pao",10,"https://");
+/***************************************************************/
+create table `images_produtos` (
+id_imagem INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_produto INT,
+caminho varchar(255),
+foreign key (id_produto) references produtos (id_produto)
+);
 
 
 
