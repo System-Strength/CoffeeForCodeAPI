@@ -3,10 +3,10 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
 
-const rotaProduto = require('./routes/produtos')
-const rotaPedido = require('./routes/pedidos')
-const rotaUsuario = require('./routes/usuarios')
-const rotaImagens = require('./routes/imagens')
+const ProductRoute = require('./routes/products')
+const OrderRoute = require('./routes/orders')
+const userRoute = require('./routes/users')
+const ImagesRoute = require('./routes/images')
 
 app.use(morgan('dev'));
 app.use('/uploads', express.static('uploads'))
@@ -31,14 +31,14 @@ app.use((req, res, next) => {
 app.get('/', async (request, response) => {
     response.redirect('https://www.kauavitorio.com/systemstrength/api/')
 });
-app.use('/produtos', rotaProduto);
-app.use('/pedidos', rotaPedido);
-app.use('/usuarios', rotaUsuario);
-app.use('/imagens', rotaImagens);
+app.use('/products', ProductRoute);
+app.use('/orders', OrderRoute);
+app.use('/images', ImagesRoute);
+app.use('/users', userRoute);
 
 // Quando não encontra rota, entra aqui:
 app.use((req, res, next) => {
-    const erro = new Error('Não encontrado');
+    const erro = new Error('Not found');
     erro.status = 404;
     next(erro);
 });

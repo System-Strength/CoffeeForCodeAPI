@@ -3,22 +3,22 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-exports.cadastrarUsuario = async (req, res, next) => {
+exports.RegisterUsers = async (req, res, next) => {
     try {
-        var query = `SELECT * FROM usuarios WHERE email = ?`;
+        var query = `SELECT * FROM users WHERE email = ?`;
         var result = await mysql.execute(query, [req.body.email]);
 
         if (result.length > 0) {
-            return res.status(409).send({ message: 'Usuário já cadastrado' })
+            return res.status(409).send({ message: 'User already registered' })
         }
 
-        const hash = await bcrypt.hashSync(req.body.senha, 10);
+        const hash = await bcrypt.hashSync(req.body.password, 10);
 
-        query = 'INSERT INTO usuarios (email, senha) VALUES (?,?)';
+        query = 'INSERT INTO users (email, password) VALUES (?,?)';
         const results = await mysql.execute(query, [req.body.email,hash]);
 
         const response = {
-            message: 'Usuário criado com sucesso',
+            message: 'User created successfully',
             createdUser: {
                 userId: results.insertId,
                 email: req.body.email
@@ -32,18 +32,18 @@ exports.cadastrarUsuario = async (req, res, next) => {
 };
 
 
-exports.loginUsuario = async (req, res, next) => {
+exports.UserLogin = async (req, res, next) => {
     try {
-        const query = `SELECT * FROM usuarios WHERE email = ?`;
+        const query = `SELECT * FROM users WHERE email = ?`;
         var results = await mysql.execute(query, [req.body.email]);
 
         if (results.length < 1) {
-            return res.status(401).send({ message: 'Falha na autenticação' })
+            return res.status(401).send({ message: 'Authentication failed' })
         }
 
-        if (await bcrypt.compareSync(req.body.senha, results[0].senha)) {
+        if (await bcrypt.compareSync(req.body.password, results[0].password)) {
             const token = jwt.sign({
-                userId: results[0].id_usuario,
+                userId: results[0].userId,
                 email: results[0].email
             },
             process.env.JWT_KEY,
@@ -51,13 +51,13 @@ exports.loginUsuario = async (req, res, next) => {
                 expiresIn: "4h"
             });
             return res.status(200).send({
-                message: 'Autenticado com sucesso',
+                message: 'Successfully authenticated',
                 token: token
             });
         }
-        return res.status(401).send({ message: 'Falha na autenticação' })
+        return res.status(401).send({ message: 'Authentication failed' })
 
     } catch (error) {
-        return res.status(500).send({ message: 'Falha na autenticação' });
+        return res.status(500).send({ message: 'Authentication failed' });
     }
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const login = require('../middleware/login');
-const ProdutosController = require('../controllers/produtos-controller');
+const ProductsController = require('../controllers/products-controller');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -30,32 +30,33 @@ const upload = multer({
 });
 
 // Retorna todos os produtos
-router.get('/', ProdutosController.getProdutos);
+router.get('/', ProductsController.getProducts);
 
 // Insere um produto
-router.post('/', login.obrigatorio, 
-                        upload.single('imagem_produto'),
-                            ProdutosController.postProduto );
-
-//  Images
-router.post('/:id_produto/imagem', login.obrigatorio, 
-                                        upload.single('imagem_produto'),
-                                            ProdutosController.postImagem)
-
-//  Images 
-router.get('/:id_produto/imagens', ProdutosController.getImagens)
+router.post('/', login.required, 
+                        upload.single('productImage'),
+                            ProductsController.postProducts );
 
 // Retona os dados de 1 produto
-router.get('/:id_produto', 
-                            ProdutosController.getUmProduto);
+router.get('/:productId', 
+                            ProductsController.getOneProducts);
 
 //  Altera um produto
-router.patch('/', login.obrigatorio, 
-                            ProdutosController.patchProduto);
+router.patch('/:productId', login.required, 
+                                ProductsController.updateProducts);
 
 //  Exclui um produto
-router.delete('/', login.obrigatorio, 
-                            ProdutosController.deleteProduto);
+router.delete('/:productId', login.required, 
+                            ProductsController.deleteProducts);
+
+                            
+//  Images
+router.post('/:productId/image', login.required, 
+                                    upload.single('productImage'),
+                                        ProductsController.postImagem)
+
+//  Images 
+router.get('/:productId/images', ProductsController.getImages)
 
 
 module.exports = router;
