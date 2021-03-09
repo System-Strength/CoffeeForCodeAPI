@@ -23,7 +23,7 @@ create table tbl_account(
     email varchar(256) not null,
     nm_user varchar(60) not null,
     rg_user varchar(12) not null,
-    phone_user VARCHAR(15) ,
+    phone_user VARCHAR(15),
     password varchar(256) not null,
     partner BIT
 ) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
