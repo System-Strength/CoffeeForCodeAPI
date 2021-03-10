@@ -23,15 +23,26 @@ create table tbl_account(
     email varchar(256) not null,
     nm_user varchar(60) not null,
     rg_user varchar(12) not null,
+<<<<<<< HEAD
     phone_user VARCHAR(15) ,
     password varchar(256) not null,
     partner BIT
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+=======
+    phone_user VARCHAR(15),
+    password varchar(256) not null,
+    partner BIT
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 create table tbl_category(
     cd_cat int primary key auto_increment,
     nm_cat varchar(50) not null
+<<<<<<< HEAD
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 create table tbl_menu(
     cd_prod int primary key auto_increment,
@@ -41,7 +52,12 @@ create table tbl_menu(
     qntd_prod int not null,
     cat_prod varchar(50) not null,
     date_prod date
+<<<<<<< HEAD
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 insert into tbl_menu (nm_prod, price_prod, cat_prod, qntd_prod, img_prod) values ( "Expresso", "5.00", "Café", "1", "/expresso.jpg");
 
 
@@ -52,21 +68,33 @@ create table tbl_purchase(
     HomeNumber_user varchar(40),
     apt_block_user varchar(10),
     PayFormat_user varchar(20) not null
+<<<<<<< HEAD
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 create table tbl_WorkWithUS(
     cd_user int not null primary key auto_increment,
     nm_user varchar(50) not null,
     phone_user varchar(20) not null,
     email_user varchar(40) not null
+<<<<<<< HEAD
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 
 create table tbl_manager(
     nm_manager varchar(50) not null,
     cpf_manager varchar(14) not null,
     password_manager varchar(12)  primary key not null
+<<<<<<< HEAD
 );
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 create table tbl_employees(
     id_employees int primary key auto_increment,
@@ -76,7 +104,11 @@ create table tbl_employees(
     cpf_employees varchar(14) not null,
     addres_employees varchar(50) not null,
     phone_employees varchar(15) not null
+<<<<<<< HEAD
 );
+=======
+) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+>>>>>>> c058d288448313a8112147f971a5772e9d4fdd02
 
 /*
 create table tbl_partners(
