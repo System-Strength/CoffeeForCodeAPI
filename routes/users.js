@@ -7,7 +7,7 @@ const UsersController = require('../controllers/users-controller')
 router.post('/register', UsersController.RegisterUsers);
 
 //  Login User
-router.get('/login', UsersController.UserLogin);
+router.get('/login/:email/:password', UsersController.UserLogin);
 
 //  Get Informatio nof user
 router.get('/info/:email', UsersController.InfoUser);

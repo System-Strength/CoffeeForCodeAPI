@@ -37,13 +37,13 @@ exports.RegisterUsers = async (req, res, next) => {
 exports.UserLogin = async (req, res, next) => {
     try {
         const query = `SELECT * FROM tbl_account WHERE email = ?`;
-        var results = await mysql.execute(query, [req.body.email]);
+        var results = await mysql.execute(query, [req.params.email]);
 
         if (results.length < 1) {
             return res.status(401).send({ message: 'Authentication failed' })
         }
 
-        if (await bcrypt.compareSync(req.body.password, results[0].password)) {
+        if (await bcrypt.compareSync(req.params.password, results[0].password)) {
             
             return res.status(200).send({
                     id_user: results[0].id_user,
