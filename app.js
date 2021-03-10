@@ -34,7 +34,7 @@ app.get('/', async (request, response) => {
 app.use('/products', ProductRoute);
 app.use('/orders', OrderRoute);
 app.use('/images', ImagesRoute);
-app.use('/users', userRoute);
+app.use('/user', userRoute);
 
 // Quando não encontra rota, entra aqui:
 app.use((req, res, next) => {

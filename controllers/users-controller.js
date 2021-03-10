@@ -5,18 +5,19 @@ const jwt = require('jsonwebtoken');
 
 exports.RegisterUsers = async (req, res, next) => {
     try {
-        var query = `SELECT * FROM users WHERE email = ?`;
+        var query = `SELECT * FROM tbl_account WHERE email = ?`;
         var result = await mysql.execute(query, [req.body.email]);
 
         if (result.length > 0) {
             return res.status(409).send({ message: 'User already registered' })
         }
 
-        const hash = await bcrypt.hashSync(req.body.password, 10);
+        const hash = await bcrypt.hashSync(req.body.password, 12);
 
-        query = 'INSERT INTO users (email, password) VALUES (?,?)';
-        const results = await mysql.execute(query, [req.body.email,hash]);
+        query = 'INSERT INTO tbl_account (email, rg_user, password) VALUES (?,?,?)';
+        const results = await mysql.execute(query, [req.body.email, req.body.rg_user, hash]);
 
+        console.log("Email: " + req.body.email + "\nRg: " + req.body.rg_user + "\nPassword: " + hash)
         const response = {
             message: 'User created successfully',
             createdUser: {
@@ -34,19 +35,21 @@ exports.RegisterUsers = async (req, res, next) => {
 
 exports.UserLogin = async (req, res, next) => {
     try {
-        const query = `SELECT * FROM users WHERE email = ?`;
-        var results = await mysql.execute(query, [req.body.email]);
+        const query = `SELECT * FROM tbl_account WHERE email = ?`;
+        var results = await mysql.execute(query, [req.params.email]);
 
         if (results.length < 1) {
             return res.status(401).send({ message: 'Authentication failed' })
         }
 
-        if (await bcrypt.compareSync(req.body.password, results[0].password)) {
+        if (await bcrypt.compareSync(req.params.password, results[0].password)) {
             const token = jwt.sign({
                 userId: results[0].userId,
-                email: results[0].email
+                email: results[0].email,
+                phone_user: results[0].phone_user,
+                rg_user: results[0].rg_user
             },
-            process.env.JWT_KEY,
+            //process.env.JWT_KEY,
             {
                 expiresIn: "4h"
             });
@@ -56,7 +59,6 @@ exports.UserLogin = async (req, res, next) => {
             });
         }
         return res.status(401).send({ message: 'Authentication failed' })
-
     } catch (error) {
         return res.status(500).send({ message: 'Authentication failed' });
     }
