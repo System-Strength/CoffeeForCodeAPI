@@ -46,8 +46,6 @@ exports.UserLogin = async (req, res, next) => {
         if (await bcrypt.compareSync(req.body.password, results[0].password)) {
             
             return res.status(200).send({
-                message: 'Successfully authenticated',
-                response: {
                     id_user: results[0].id_user,
                     email: results[0].email,
                     phone_user: results[0].phone_user,
@@ -55,7 +53,7 @@ exports.UserLogin = async (req, res, next) => {
                     password: results[0].password
 
                 }
-            });
+            );
         }
         return res.status(401).send({ message: 'Authentication failed' })
     } catch (error) {
