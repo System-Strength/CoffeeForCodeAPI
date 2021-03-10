@@ -14,14 +14,15 @@ exports.RegisterUsers = async (req, res, next) => {
 
         const hash = await bcrypt.hashSync(req.body.password, 12);
 
-        query = 'INSERT INTO tbl_account (email, rg_user, password) VALUES (?,?,?)';
-        const results = await mysql.execute(query, [req.body.email, req.body.rg_user, hash]);
+        query = 'INSERT INTO tbl_account (email, nm_user, rg_user, password) VALUES (?,?,?)';
+        const results = await mysql.execute(query, [req.body.email, req.body.nm_user, req.body.rg_user, hash]);
 
         console.log("Email: " + req.body.email + "\nRg: " + req.body.rg_user + "\nPassword: " + hash)
         const response = {
             message: 'User created successfully',
             createdUser: {
                 userId: results.insertId,
+                nm_user: req.body.nm_user,
                 email: req.body.email
             }
         }
