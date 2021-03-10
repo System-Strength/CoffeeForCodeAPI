@@ -17,7 +17,7 @@ exports.RegisterUsers = async (req, res, next) => {
         query = 'INSERT INTO tbl_account (email, nm_user, rg_user, password) VALUES (?,?,?,?)';
         const results = await mysql.execute(query, [req.body.email, req.body.nm_user, req.body.rg_user, hash]);
 
-        console.log("Email: " + req.body.email + "\nRg: " + req.body.rg_user + "\nPassword: " + hash)
+        //console.log("Email: " + req.body.email + "\nRg: " + req.body.rg_user + "\nPassword: " + hash)
         const response = {
             message: 'User created successfully',
             createdUser: {
@@ -37,30 +37,27 @@ exports.RegisterUsers = async (req, res, next) => {
 exports.UserLogin = async (req, res, next) => {
     try {
         const query = `SELECT * FROM tbl_account WHERE email = ?`;
-        var results = await mysql.execute(query, [req.params.email]);
+        var results = await mysql.execute(query, [req.body.email]);
 
         if (results.length < 1) {
             return res.status(401).send({ message: 'Authentication failed' })
         }
 
-        if (await bcrypt.compareSync(req.params.password, results[0].password)) {
-            const token = jwt.sign({
-                userId: results[0].userId,
-                email: results[0].email,
-                phone_user: results[0].phone_user,
-                rg_user: results[0].rg_user
-            },
-            //process.env.JWT_KEY,
-            {
-                expiresIn: "4h"
-            });
+        if (await bcrypt.compareSync(req.body.password, results[0].password)) {
+            
             return res.status(200).send({
                 message: 'Successfully authenticated',
-                token: token
+                response: {
+                    id_user: results[0].id_user,
+                    email: results[0].email,
+                    phone_user: results[0].phone_user,
+                    rg_user: results[0].rg_user
+
+                }
             });
         }
-        return res.status(401).send({ message: 'Authentication failed' })
+        return res.status(401).send({ message: 'Authentication failed Senha' })
     } catch (error) {
-        return res.status(500).send({ message: 'Authentication failed' });
+        return res.status(500).send({ message: 'Authentication failed ' + error });
     }
 };
