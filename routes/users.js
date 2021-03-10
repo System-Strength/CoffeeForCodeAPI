@@ -8,4 +8,6 @@ router.post('/register', UsersController.RegisterUsers);
 
 router.post('/login', UsersController.UserLogin);
 
+router.get('/info/:email', UsersController.InfoUser);
+
 module.exports = router;

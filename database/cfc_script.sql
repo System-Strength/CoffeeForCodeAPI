@@ -25,7 +25,7 @@ create table tbl_account(
     rg_user varchar(12) not null,
     phone_user VARCHAR(15) ,
     password varchar(256) not null,
-    partner BIT
+    partner BIT DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 create table tbl_category(
@@ -108,3 +108,4 @@ select * from tbl_account;
 select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
+

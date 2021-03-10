@@ -51,12 +51,42 @@ exports.UserLogin = async (req, res, next) => {
                     id_user: results[0].id_user,
                     email: results[0].email,
                     phone_user: results[0].phone_user,
-                    rg_user: results[0].rg_user
+                    rg_user: results[0].rg_user,
+                    password: results[0].password
 
                 }
             });
         }
-        return res.status(401).send({ message: 'Authentication failed Senha' })
+        return res.status(401).send({ message: 'Authentication failed' })
+    } catch (error) {
+        return res.status(500).send({ message: 'Authentication failed ' + error });
+    }
+};
+
+exports.InfoUser = async (req, res, next) => {
+    try {
+        const query = `SELECT * FROM tbl_account WHERE email = ?`;
+        var results = await mysql.execute(query, [req.params.email]);
+
+        if (results.length < 1) {
+            return res.status(401).send({ message: 'Authentication failed' })
+        }
+
+        if (await bcrypt.compareSync(req.body.password, results[0].password)) {
+            
+            return res.status(200).send({
+                message: 'Successfully authenticated',
+                response: {
+                    id_user: results[0].id_user,
+                    email: results[0].email,
+                    phone_user: results[0].phone_user,
+                    rg_user: results[0].rg_user,
+                    password: results[0].password
+
+                }
+            });
+        }
+        return res.status(401).send({ message: 'Authentication failed' })
     } catch (error) {
         return res.status(500).send({ message: 'Authentication failed ' + error });
     }
