@@ -6,6 +6,6 @@ const UsersController = require('../controllers/users-controller')
 //  Register User
 router.post('/register', UsersController.RegisterUsers);
 
-router.post('/login/:email&:password', UsersController.UserLogin);
+router.get('/login/:email&:password', UsersController.UserLogin);
 
 module.exports = router;
