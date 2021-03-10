@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken');
 
 exports.RegisterUsers = async (req, res, next) => {
     try {
-        var query = `SELECT * FROM tbl_account WHERE email = ?`;
+        /*var query = `SELECT * FROM tbl_account WHERE email = ?`;
         var result = await mysql.execute(query, [req.body.email]);
 
         if (result.length > 0) {
             return res.status(409).send({ message: 'User already registered' })
-        }
+        }*/
 
         const hash = await bcrypt.hashSync(req.body.password, 12);
 
