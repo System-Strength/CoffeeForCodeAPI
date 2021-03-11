@@ -64,16 +64,18 @@ exports.getProductsByPopular = async (req, res, next) => {
         }else{
             return res.status(200).send(results.map(prods => {
                     return {
-                    cd_prod: prods.cd_prod,
-                    img_prod: process.env.URL_API + prods.img_prod,
-                    nm_prod: prods.nm_prod,
-                    price_prod: prods.price_prod,
-                    qntd_prod: prods.qntd_prod,
-                    cd_cat: prods.cd_cat,
-                    date_prod: prods.date_prod,
-                    popular: prods.popular
+                        Search: {
+                            cd_prod: prods.cd_prod,
+                            img_prod: process.env.URL_API + prods.img_prod,
+                            nm_prod: prods.nm_prod,
+                            price_prod: prods.price_prod,
+                            qntd_prod: prods.qntd_prod,
+                            cd_cat: prods.cd_cat,
+                            date_prod: prods.date_prod,
+                            popular: prods.popular
+                        }
                 }
-            }))
+        }))
         }
 
     }catch (error){
