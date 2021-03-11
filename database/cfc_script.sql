@@ -24,9 +24,11 @@ create table tbl_account(
     nm_user varchar(60) not null,
     rg_user varchar(12) not null,
     phone_user VARCHAR(15) ,
+    address_user varchar(300),
     password varchar(256) not null,
     partner BIT DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
 
 create table tbl_category(
     cd_cat int primary key auto_increment,

@@ -50,8 +50,10 @@ exports.UserLogin = async (req, res, next) => {
                     email: results[0].email,
                     nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
+                    address_user: results[0].address_user,
                     rg_user: results[0].rg_user,
-                    password: results[0].password
+                    password: results[0].password,
+                    partner: results[0].partner
 
                 }
             );
