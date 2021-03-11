@@ -14,6 +14,7 @@ create database `heroku_88863b9257990d2`  DEFAULT CHARACTER SET utf8  DEFAULT CO
 use heroku_88863b9257990d2;
 
 /******	Para test local utilizar os comandos a baixo ******/
+drop database db_cfc;
 create database `db_cfc` DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
 use db_cfc;
 /**********************************************************************************/
@@ -22,9 +23,10 @@ create table tbl_account(
     id_user int primary key auto_increment,
     email varchar(256) not null,
     nm_user varchar(60) not null,
-    rg_user varchar(12) not null,
+    cpf_user varchar(14) not null,
     phone_user VARCHAR(15) ,
     address_user varchar(300),
+    img_user varchar(300),
     password varchar(256) not null,
     partner int(1) DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
@@ -35,18 +37,20 @@ create table tbl_category(
     nm_cat varchar(50) not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
+
 create table tbl_menu(
     cd_prod int primary key auto_increment,
-    img_prod mediumblob not null,
-    nm_prod varchar(50) not null,
+    img_prod varchar(300) not null,
+    nm_prod varchar(100) not null,
     price_prod decimal(10, 2) not null,
     qntd_prod int not null,
-    cat_prod varchar(50) not null,
-    date_prod date
+    cd_cat int not null,
+    date_prod date,
+    popular int(1),
+    FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-insert into tbl_menu (nm_prod, price_prod, cat_prod, qntd_prod, img_prod) values ( "Expresso", "5.00", "Café", "1", "/expresso.jpg");
-
+DROP table tbl_menu;
 
 create table tbl_purchase(
     cd_purchase int primary key auto_increment,
