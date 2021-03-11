@@ -48,6 +48,7 @@ exports.UserLogin = async (req, res, next) => {
             return res.status(200).send({
                     id_user: results[0].id_user,
                     email: results[0].email,
+                    nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
                     rg_user: results[0].rg_user,
                     password: results[0].password
