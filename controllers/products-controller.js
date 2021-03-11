@@ -14,6 +14,8 @@ exports.getProducts = async (req, res, next) => {
                     nm_prod: prods.nm_prod,
                     price_prod: prods.price_prod,
                     qntd_prod: prods.qntd_prod,
+                    size: prods.size,
+                    bonusDesc: prods.bonusDesc,
                     cd_cat: prods.cd_cat,
                     date_prod: prods.date_prod,
                     popular: prods.popular
@@ -42,6 +44,8 @@ exports.getProductsByCaterory = async (req, res, next) => {
                     nm_prod: prods.nm_prod,
                     price_prod: prods.price_prod,
                     qntd_prod: prods.qntd_prod,
+                    size: prods.size,
+                    bonusDesc: prods.bonusDesc,
                     cd_cat: prods.cd_cat,
                     date_prod: prods.date_prod,
                     popular: prods.popular
@@ -70,6 +74,8 @@ exports.getProductsByPopular = async (req, res, next) => {
                         nm_prod: prods.nm_prod,
                         price_prod: prods.price_prod,
                         qntd_prod: prods.qntd_prod,
+                        size: prods.size,
+                        bonusDesc: prods.bonusDesc,
                         cd_cat: prods.cd_cat,
                         date_prod: prods.date_prod,
                         popular: prods.popular
@@ -90,12 +96,14 @@ exports.postProducts = async (req, res, next ) => {
     console.log(req.file);
     let data = new Date();
     var dataFormat = data.toISOString().substring(0, 10);
-    const query = 'INSERT INTO tbl_menu(img_prod, nm_prod, price_prod, qntd_prod, cd_cat, date_prod, popular) VALUES (?,?,?,?,?,?,?)'
+    const query = 'INSERT INTO tbl_menu(img_prod, nm_prod, price_prod, qntd_prod, size, bonusDesc, cd_cat, date_prod, popular) VALUES (?,?,?,?,?,?,?,?,?)'
     const result = await mysql.execute(query, [
         req.file.path,
         req.body.nm_prod,
         req.body.price_prod,
         req.body.qntd_prod,
+        req.body.size,
+        req.body.bonusDesc,
         req.body.cd_cat,
         dataFormat,
         req.body.popular
@@ -153,12 +161,14 @@ exports.updateProducts = async (req, res, next ) => {
         SET nm_prod = ?,
             price_prod = ?,
             qntd_prod = ?,
+            size = ?,
+            bonusDesc =?,
             cd_cat = ?,
             date_prod = ?,
             popular = ?
                 WHERE cd_prod = ?`
         await mysql.execute(query, [ req.body.nm_prod, req.body.price_prod, 
-            req.body.qntd_prod, req.body.cd_cat, dataFormat, req.body.popular,req.params.cd_prod ])
+            req.body.qntd_prod, req.body.size, req.body.bonusDesc, req.body.cd_cat, dataFormat, req.body.popular,req.params.cd_prod ])
         const response = {
             mensagem: 'Product updated successfully !!',
             productsUpdated: {
