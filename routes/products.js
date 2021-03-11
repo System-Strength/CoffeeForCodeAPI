@@ -32,21 +32,25 @@ const upload = multer({
 // Retorna todos os produtos
 router.get('/', ProductsController.getProducts);
 
+// Retorna todos os produtos pela categoria
+router.get('/category/:cd_cat', ProductsController.getProductsByCaterory);
+
+// Retorna todos os produtos pela populariedade
+router.get('/popular', ProductsController.getProductsByPopular);
+
 // Insere um produto
-router.post('/', login.required, 
-                        upload.single('productImage'),
+router.post('/',upload.single('img_prod'),
                             ProductsController.postProducts );
 
 // Retona os dados de 1 produto
-router.get('/:productId', 
+router.get('/:cd_prod', 
                             ProductsController.getOneProducts);
 
 //  Altera um produto
-router.patch('/:productId', login.required, 
-                                ProductsController.updateProducts);
+router.patch('/:cd_prod', ProductsController.updateProducts);
 
 //  Exclui um produto
-router.delete('/:productId', login.required, 
+router.delete('/:cd_prod', login.required, 
                             ProductsController.deleteProducts);
 
                             

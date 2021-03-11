@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser')
 
 const ProductRoute = require('./routes/products')
+const CategoryRoute = require('./routes/category')
 const OrderRoute = require('./routes/orders')
 const userRoute = require('./routes/users')
 const ImagesRoute = require('./routes/images')
@@ -32,6 +33,7 @@ app.get('/', async (request, response) => {
     response.redirect('https://www.kauavitorio.com/systemstrength/api/')
 });
 app.use('/products', ProductRoute);
+app.use('/category', CategoryRoute);
 app.use('/orders', OrderRoute);
 app.use('/images', ImagesRoute);
 app.use('/user', userRoute);
