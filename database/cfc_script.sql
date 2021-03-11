@@ -6,7 +6,7 @@
 -- Author: SystemStrength
 
 /****** Comandos abaixo devem ser utilizados apenas em conexao direta com a api  ******/
-drop database heroku_88863b9257990d2;
+-- drop database heroku_88863b9257990d2;
 
 create database `heroku_88863b9257990d2`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
 
@@ -44,11 +44,23 @@ create table tbl_menu(
     nm_prod varchar(100) not null,
     price_prod decimal(10, 2) not null,
     qntd_prod int not null,
+    size varchar(110),
+    bonusDesc varchar(210),
     cd_cat int not null,
     date_prod date,
     popular int(1),
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
+update tbl_menu set size = "Click para saber mais" where cd_prod = 24;
+
+update tbl_account set nm_user = "Kauã Vitorio Da Silva Lima" where  id_user = 4;
+
+alter table tbl_menu modify column size varchar(110);
+
+select * from tbl_menu;
+
 
 DROP table tbl_menu;
 
@@ -114,4 +126,5 @@ select * from tbl_account;
 select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
+
 

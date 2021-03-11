@@ -39,7 +39,7 @@ exports.UserLogin = async (req, res, next) => {
         const query = `SELECT * FROM tbl_account WHERE email = ?`;
         var results = await mysql.execute(query, [req.params.email]);
 
-        if (results.length < 1) {
+        if (results.length == 0) {
             return res.status(401).send({ message: 'Authentication failed' })
         }
 
@@ -51,6 +51,7 @@ exports.UserLogin = async (req, res, next) => {
                     nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
                     address_user: results[0].address_user,
+                    img_user: results[0].img_user,
                     cpf_user: results[0].cpf_user,
                     password: results[0].password,
                     partner: results[0].partner
