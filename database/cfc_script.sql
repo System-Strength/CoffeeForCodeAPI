@@ -26,7 +26,7 @@ create table tbl_account(
     phone_user VARCHAR(15) ,
     address_user varchar(300),
     password varchar(256) not null,
-    partner BIT DEFAULT 0
+    partner int(1) DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 

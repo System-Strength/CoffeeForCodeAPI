@@ -14,8 +14,8 @@ exports.RegisterUsers = async (req, res, next) => {
 
         const hash = await bcrypt.hashSync(req.body.password, 12);
 
-        query = 'INSERT INTO tbl_account (email, nm_user, rg_user, password) VALUES (?,?,?,?)';
-        const results = await mysql.execute(query, [req.body.email, req.body.nm_user, req.body.rg_user, hash]);
+        query = 'INSERT INTO tbl_account (email, nm_user, cpf_user, password) VALUES (?,?,?,?)';
+        const results = await mysql.execute(query, [req.body.email, req.body.nm_user, req.body.cpf_user, hash]);
 
         //console.log("Email: " + req.body.email + "\nRg: " + req.body.rg_user + "\nPassword: " + hash)
         const response = {
@@ -51,7 +51,7 @@ exports.UserLogin = async (req, res, next) => {
                     nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
                     address_user: results[0].address_user,
-                    rg_user: results[0].rg_user,
+                    cpf_user: results[0].cpf_user,
                     password: results[0].password,
                     partner: results[0].partner
 
@@ -78,7 +78,7 @@ exports.InfoUser = async (req, res, next) => {
                     id_user: results[0].id_user,
                     email: results[0].email,
                     phone_user: results[0].phone_user,
-                    rg_user: results[0].rg_user,
+                    cpf_user: results[0].cpf_user,
                     password: results[0].password
                 }
             });
