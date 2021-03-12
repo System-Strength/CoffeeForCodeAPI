@@ -8,7 +8,7 @@
 /****** Comandos abaixo devem ser utilizados apenas em conexao direta com a api  ******/
 -- drop database heroku_88863b9257990d2;
 
-create database `heroku_88863b9257990d2`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
+-- create database `heroku_88863b9257990d2`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
 
 
 use heroku_88863b9257990d2;
@@ -29,8 +29,11 @@ create table tbl_account(
     complement varchar(100),
     img_user varchar(300),
     password varchar(256) not null,
-    partner int(1) DEFAULT 0
+    partner int(1) DEFAULT 0,
+    partner_date date
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+alter table tbl_account add column partner_date date;
 
 select * from tbl_account;
 

@@ -55,7 +55,8 @@ exports.UserLogin = async (req, res, next) => {
                     img_user: results[0].img_user,
                     cpf_user: results[0].cpf_user,
                     password: results[0].password,
-                    partner: results[0].partner
+                    partner: results[0].partner,
+                    partner_Startdate: results[0].partner_Startdate
 
                 }
             );
@@ -86,7 +87,8 @@ exports.InfoUser = async (req, res, next) => {
                     img_user: results[0].img_user,
                     cpf_user: results[0].cpf_user,
                     password: results[0].password,
-                    partner: results[0].partner
+                    partner: results[0].partner,
+                    partner_Startdate: results[0].partner_Startdate
                 }
             });
         }
