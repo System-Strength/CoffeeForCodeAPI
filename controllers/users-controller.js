@@ -73,23 +73,19 @@ exports.InfoUser = async (req, res, next) => {
         var results = await mysql.execute(query, [req.params.email]);
 
         if (results.length < 1) {
-            return res.status(401).send({ message: 'No user with this email: ' + req.params.email })
+            return res.status(401).send({ message: 'No user found'})
         }else{
             return res.status(200).send({
-                message: 'Successfully result',
-                response: {
-                    id_user: results[0].id_user,
-                    email: results[0].email,
-                    nm_user: results[0].nm_user,
-                    phone_user: results[0].phone_user,
-                    address_user: results[0].address_user,
-                    complement: results[0].complement,
-                    img_user: results[0].img_user,
-                    cpf_user: results[0].cpf_user,
-                    password: results[0].password,
-                    partner: results[0].partner,
-                    partner_Startdate: results[0].partner_Startdate
-                }
+                id_user: results[0].id_user,
+                email: results[0].email,
+                nm_user: results[0].nm_user,
+                phone_user: results[0].phone_user,
+                address_user: results[0].address_user,
+                complement: results[0].complement,
+                img_user: results[0].img_user,
+                cpf_user: results[0].cpf_user,
+                partner: results[0].partner,
+                partner_Startdate: results[0].partner_Startdate
             });
         }
 
