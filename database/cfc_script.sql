@@ -32,6 +32,8 @@ create table tbl_account(
     partner int(1) DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
+select * from tbl_account;
+
 create table tbl_category(
     cd_cat int primary key auto_increment,
     nm_cat varchar(50) not null

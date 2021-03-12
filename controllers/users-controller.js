@@ -95,3 +95,27 @@ exports.InfoUser = async (req, res, next) => {
         return res.status(500).send({ message: 'Error: ' + error });
     }
 };
+
+exports.updateAddress = async (req, res, next ) => {
+    try {
+        const query = `
+        UPDATE 
+            tbl_account 
+        SET 
+            address_user = ?, 
+            complement = ? 
+            WHERE 
+                id_user = ?`
+        await mysql.execute(query, [ req.body.address_user, req.body.complement, req.params.id_user ])
+        const response = {
+            mensagem: 'User updated successfully !!',
+            productsUpdated: {
+                address_user: req.body.address_user,
+                complement: req.body.complement
+            }
+        }
+        return res.status(202).send(response);
+    } catch (error) {
+        return res.status(500).send({ error: error });
+    }
+}
