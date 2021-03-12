@@ -51,6 +51,7 @@ exports.UserLogin = async (req, res, next) => {
                     nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
                     address_user: results[0].address_user,
+                    complement: results[0].complement,
                     img_user: results[0].img_user,
                     cpf_user: results[0].cpf_user,
                     password: results[0].password,
@@ -78,9 +79,14 @@ exports.InfoUser = async (req, res, next) => {
                 response: {
                     id_user: results[0].id_user,
                     email: results[0].email,
+                    nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
+                    address_user: results[0].address_user,
+                    complement: results[0].complement,
+                    img_user: results[0].img_user,
                     cpf_user: results[0].cpf_user,
-                    password: results[0].password
+                    password: results[0].password,
+                    partner: results[0].partner
                 }
             });
         }

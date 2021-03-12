@@ -26,11 +26,11 @@ create table tbl_account(
     cpf_user varchar(14) not null,
     phone_user VARCHAR(15) ,
     address_user varchar(300),
+    complement varchar(100),
     img_user varchar(300),
     password varchar(256) not null,
     partner int(1) DEFAULT 0
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-
 
 create table tbl_category(
     cd_cat int primary key auto_increment,
@@ -40,7 +40,7 @@ create table tbl_category(
 
 create table tbl_menu(
     cd_prod int primary key auto_increment,
-    img_prod varchar(300) not null,
+    img_prod varchar(100) not null,
     nm_prod varchar(100) not null,
     price_prod decimal(10, 2) not null,
     qntd_prod int not null,
@@ -53,14 +53,16 @@ create table tbl_menu(
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
-update tbl_menu set size = "Click para saber mais" where cd_prod = 24;
+update tbl_menu set nm_prod = "Matheus braboo" where cd_prod = 14;
+update tbl_menu set nm_prod = "Combo happy" where cd_prod = 24;
+update tbl_menu set nm_prod = "Unicornio Frappuccino" where cd_prod = 4;
+update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
 
 update tbl_account set nm_user = "Kauã Vitorio Da Silva Lima" where  id_user = 4;
 
 alter table tbl_menu modify column size varchar(110);
 
 select * from tbl_menu;
-
 
 DROP table tbl_menu;
 
