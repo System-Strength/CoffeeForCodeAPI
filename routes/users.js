@@ -41,7 +41,6 @@ router.patch('/updateaddress/:id_user', UsersController.updateAddress)
 //  Get Informatio nof user
 router.get('/info/:email', UsersController.InfoUser);
 
-router.patch('/update/:id_user', upload.single('img_user'),
-                                        UsersController.updateUser);
+router.patch('/update/:id_user', UsersController.updateUser);
 
 module.exports = router;

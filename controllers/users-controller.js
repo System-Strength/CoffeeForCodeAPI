@@ -129,19 +129,17 @@ exports.updateUser = async (req, res, next ) => {
         cpf_user = ?,
         phone_user = ?, 
         address_user = ?, 
-        complement = ?,
-        img_user = ?
+        complement = ?
             WHERE 
                 id_user = ?`
         await mysql.execute(query, [ req.body.nm_user, req.body.cpf_user, req.body.phone_user, 
-            req.body.address_user, req.body.complement, req.file.path, req.params.id_user ])
+            req.body.address_user, req.body.complement, req.params.id_user ])
         const response = {
             nm_user: req.body.nm_user,
             cpf_user: req.body.cpf_user,
             phone_user: req.body.phone_user,
             address_user: req.body.address_user,
             complement: req.body.complement,
-            img_user: process.env.URL_API + req.file.path
         }
         return res.status(202).send(response);
     } catch (error) {
