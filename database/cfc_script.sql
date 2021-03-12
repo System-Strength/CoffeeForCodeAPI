@@ -30,16 +30,17 @@ create table tbl_account(
     img_user varchar(300),
     password varchar(256) not null,
     partner int(1) DEFAULT 0,
-    partner_date date
+    partner_Startdate date
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-alter table tbl_account add column partner_date date;
+update tbl_account set img_user = "uploads/user/kauavitorio.jpeg" where id_user = 4;
 
 select * from tbl_account;
 
 create table tbl_category(
     cd_cat int primary key auto_increment,
-    nm_cat varchar(50) not null
+    nm_cat varchar(50) not null,
+    img_cat varchar(50)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 
@@ -127,11 +128,17 @@ insert into tbl_category (nm_cat) values ("MilkShake");
 insert into tbl_category (nm_cat) values ("Sanduíche");
 insert into tbl_category (nm_cat) values ("Cookies");
 insert into tbl_category (nm_cat) values ("Hambúrguer");
+update tbl_account set address_user = null, complement = null where id_user = 4; 
+insert into tbl_account (email, nm_user, cpf_user, password) values ("kauavitorioof@gmail.com", "Kauã Vitorio", "433.000.000-01", "@!Kaua2004");
+insert into tbl_account (email, nm_user, cpf_user, password) values ("yuridantaass@gmail.com", "Yuri Dantas", "000.000.000-01", "Yuridantas17");
 
 /******************** Selects  ********************/
 select * from tbl_account;
 select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
+
+update tbl_account set nm_user = 'Roberto filho ' where id_user = 34;
+update tbl_account set img_user = "uploads/user/YuriProfile.jpg" where id_user = 14;
 
 
