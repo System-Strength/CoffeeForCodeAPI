@@ -7,13 +7,16 @@ exports.getCategory = async (req, res, next ) => {
     if (results.length < 1) {
         return res.status(204).send({ message: 'No Category registerd' })
     }else{
-        return res.status(200).send(results.map(cat => {
-            return {
-                cd_cat: cat.cd_cat,
-                nm_cat: cat.nm_cat,
-                img_cat: process.env.URL_API + cat.img_cat
-            }
-        }))
+        const response = {
+            Search: results.map(cat => {
+                return {
+                    cd_cat: cat.cd_cat,
+                    nm_cat: cat.nm_cat,
+                    img_cat: process.env.URL_API + cat.img_cat
+                }
+            })
+        }
+        return res.status(200).send(response)
     }
     
     } catch (error) {
