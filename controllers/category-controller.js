@@ -10,7 +10,8 @@ exports.getCategory = async (req, res, next ) => {
         return res.status(200).send(results.map(cat => {
             return {
                 cd_cat: cat.cd_cat,
-                nm_cat: cat.nm_cat
+                nm_cat: cat.nm_cat,
+                img_cat: process.env.URL_API + cat.img_cat
             }
         }))
     }
@@ -22,11 +23,12 @@ exports.getCategory = async (req, res, next ) => {
 
 exports.postCategory = async (req, res, next ) => {
     try {
-    const query = 'INSERT INTO tbl_category(nm_cat) VALUES (?)'
-    const result = await mysql.execute(query, [ req.params.nm_cat ])
+    const query = 'INSERT INTO tbl_category(nm_cat, img_cat) VALUES (?,?)'
+    const result = await mysql.execute(query, [ req.params.nm_cat, req.file.path ])
     return res.status(201).send({
         cd_cat: result.insertId,
-        nm_cat: req.params.nm_cat
+        nm_cat: req.params.nm_cat,
+        img_cat: process.env.URL_API + req.file.path
     });
     } catch (error) {
         return res.status(500).send({error: error})

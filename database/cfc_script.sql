@@ -59,7 +59,7 @@ create table tbl_menu(
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
-update tbl_menu set nm_prod = "Matheus braboo" where cd_prod = 14;
+update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
 update tbl_menu set nm_prod = "Combo happy" where cd_prod = 24;
 update tbl_menu set nm_prod = "Unicornio Frappuccino" where cd_prod = 4;
 update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
@@ -138,7 +138,5 @@ select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
 
-update tbl_account set nm_user = 'Roberto filho ' where id_user = 34;
-update tbl_account set img_user = "uploads/user/YuriProfile.jpg" where id_user = 14;
 
 
