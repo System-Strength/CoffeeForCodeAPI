@@ -44,7 +44,7 @@ exports.getProductsByCaterory = async (req, res, next) => {
                 Products: results.map(prods => {
                     return {
                         cd_prod: prods.cd_prod,
-                        img_prod: prods.img_prod,
+                        img_prod: process.env.URL_API + prods.img_prod,
                         nm_prod: prods.nm_prod,
                         price_prod: prods.price_prod,
                         qntd_prod: prods.qntd_prod,
