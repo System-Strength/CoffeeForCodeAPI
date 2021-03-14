@@ -40,20 +40,23 @@ exports.getProductsByCaterory = async (req, res, next) => {
         if (results.length < 1) {
             return res.status(204).send({ message: 'Nothing products with this category' })
         }else{
-            return res.status(200).send(results.map(prods => {
-                return {
-                    cd_prod: prods.cd_prod,
-                    img_prod: prods.img_prod,
-                    nm_prod: prods.nm_prod,
-                    price_prod: prods.price_prod,
-                    qntd_prod: prods.qntd_prod,
-                    size: prods.size,
-                    bonusDesc: prods.bonusDesc,
-                    cd_cat: prods.cd_cat,
-                    date_prod: prods.date_prod,
-                    popular: prods.popular
-                }
-            }))
+            const response = {
+                Products: results.map(prods => {
+                    return {
+                        cd_prod: prods.cd_prod,
+                        img_prod: prods.img_prod,
+                        nm_prod: prods.nm_prod,
+                        price_prod: prods.price_prod,
+                        qntd_prod: prods.qntd_prod,
+                        size: prods.size,
+                        bonusDesc: prods.bonusDesc,
+                        cd_cat: prods.cd_cat,
+                        date_prod: prods.date_prod,
+                        popular: prods.popular
+                    }
+                })
+            }
+            return res.status(200).send(response)
         }
 
     }catch (error){
