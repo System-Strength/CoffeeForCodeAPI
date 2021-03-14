@@ -26,6 +26,13 @@ exports.getCategory = async (req, res, next ) => {
 
 exports.postCategory = async (req, res, next ) => {
     try {
+        var queryProd = `SELECT * FROM tbl_category WHERE nm_cat = ?`;
+        var resultProd = await mysql.execute(queryProd, [req.params.nm_cat]);
+
+        if (resultProd.length > 0) {
+            return res.status(409).send({ message: 'Category is already inserte' + 'But Image was insert .-.' })
+        }
+
     const query = 'INSERT INTO tbl_category(nm_cat, img_cat) VALUES (?,?)'
     const result = await mysql.execute(query, [ req.params.nm_cat, req.file.path ])
     return res.status(201).send({
