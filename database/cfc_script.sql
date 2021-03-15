@@ -48,7 +48,7 @@ create table tbl_menu(
     cd_prod int primary key auto_increment,
     img_prod varchar(100) not null,
     nm_prod varchar(100) not null,
-    price_prod decimal(10, 2) not null,
+    price_prod decimal(12, 2) not null,
     qntd_prod int not null,
     size varchar(110),
     bonusDesc varchar(210),
@@ -57,6 +57,7 @@ create table tbl_menu(
     popular int(1),
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
 
 update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
 update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
@@ -71,6 +72,14 @@ alter table tbl_menu modify column size varchar(110);
 select * from tbl_menu;
 
 DROP table tbl_menu;
+
+create table tbl_shoppingcart(
+	cd_cart int primary key auto_increment,
+    email_user varchar(256) not null,
+    cd_prod int not null,
+    qt_prod int not null,
+    FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
+)DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 create table tbl_purchase(
     cd_purchase int primary key auto_increment,
@@ -118,8 +127,6 @@ create table tbl_partners(
     redeSocial_parc varchar(40),
     descr_parc varchar(2000)
 ); */
-
-
 
 /******************** Inserts ********************/
 insert into tbl_category (nm_cat) values ("Café");
