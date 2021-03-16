@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
 
+const ShoppingCart = require('./routes/shoppingcart')
 const ProductRoute = require('./routes/products')
 const CategoryRoute = require('./routes/category')
 const OrderRoute = require('./routes/orders')
@@ -37,6 +38,7 @@ app.use('/category', CategoryRoute);
 app.use('/orders', OrderRoute);
 app.use('/images', ImagesRoute);
 app.use('/user', userRoute);
+app.use('/shoppingcart', ShoppingCart);
 
 // Quando não encontra rota, entra aqui:
 app.use((req, res, next) => {

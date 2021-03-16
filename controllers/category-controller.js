@@ -57,3 +57,25 @@ exports.updateCategory = async (req, res, next) => {
         return res.status(500).send({ error: error });        
     }
 };
+
+
+// ---------------- Sistem --------------------------------\\
+exports.getCategorySistem = async (req, res, next ) => {
+    try {
+    const results = await mysql.execute('SELECT * FROM tbl_category;')
+    if (results.length < 1) {
+        return res.status(204).send({ message: 'No Category registerd' })
+    }else{
+        return res.status(200).send(results.map(cat => {
+            return {
+                cd_cat: cat.cd_cat,
+                nm_cat: cat.nm_cat,
+                img_cat: process.env.URL_API + cat.img_cat
+            }
+        }))
+    }
+    
+    } catch (error) {
+        return res.status(500).send({error: error})
+    }
+};

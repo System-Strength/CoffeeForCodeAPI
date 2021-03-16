@@ -32,6 +32,8 @@ const upload = multer({
 //  Get all category
 router.get('/', CategoryController.getCategory)
 
+router.get('/sistema', CategoryController.getCategorySistem)
+
 //  Insert new category
 router.post('/insert/:nm_cat', upload.single('img_cat'),
                                     CategoryController.postCategory)

@@ -74,8 +74,7 @@ select * from tbl_menu;
 DROP table tbl_menu;
 
 create table tbl_shoppingcart(
-	cd_cart int primary key auto_increment,
-    email_user varchar(256) not null,
+    email_user varchar(256) primary key not null,
     cd_prod int not null,
     qt_prod int not null,
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
