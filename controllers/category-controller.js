@@ -31,15 +31,15 @@ exports.postCategory = async (req, res, next ) => {
 
         if (resultProd.length > 0) {
             return res.status(409).send({ message: 'Category is already inserte' + 'But Image was insert .-.' })
+        }else{
+            const query = 'INSERT INTO tbl_category(nm_cat, img_cat) VALUES (?,?)'
+            const result = await mysql.execute(query, [ req.params.nm_cat, req.file.path ])
+            return res.status(201).send({
+                cd_cat: result.insertId,
+                nm_cat: req.params.nm_cat,
+                img_cat: process.env.URL_API + req.file.path
+            });
         }
-
-    const query = 'INSERT INTO tbl_category(nm_cat, img_cat) VALUES (?,?)'
-    const result = await mysql.execute(query, [ req.params.nm_cat, req.file.path ])
-    return res.status(201).send({
-        cd_cat: result.insertId,
-        nm_cat: req.params.nm_cat,
-        img_cat: process.env.URL_API + req.file.path
-    });
     } catch (error) {
         return res.status(500).send({error: error})
     }
