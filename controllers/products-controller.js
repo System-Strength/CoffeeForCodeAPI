@@ -150,6 +150,7 @@ exports.getOneProducts = async (req, res, next) => {
             nm_prod: result[0].nm_prod,
             price_prod: parseFloat(result[0].price_prod),
             qntd_prod: result[0].qntd_prod,
+            size: result[0].size,
             cd_cat: result[0].cd_cat,
             date_prod: result[0].date_prod,
             popular: result[0].popular
