@@ -144,7 +144,7 @@ exports.getOneProducts = async (req, res, next) => {
                 message: 'No product found with this ID'
             })
         }
-        return res.status(201).send({
+        return res.status(200).send({
             cd_prod: result[0].cd_prod,
             img_prod: result[0].img_prod,
             nm_prod: result[0].nm_prod,

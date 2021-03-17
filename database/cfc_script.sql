@@ -74,7 +74,7 @@ select * from tbl_menu;
 DROP table tbl_menu;
 
 create table tbl_shoppingcart(
-    email_user varchar(256) primary key not null,
+    email_user varchar(256) not null,
     cd_prod int not null,
     qt_prod int not null,
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
@@ -143,6 +143,10 @@ select * from tbl_account;
 select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
+select * from tbl_shoppingcart;
+
+delete from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com" and cd_prod = 3;
+select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
 
 
 
