@@ -146,7 +146,7 @@ exports.getOneProducts = async (req, res, next) => {
         }
         return res.status(200).send({
             cd_prod: result[0].cd_prod,
-            img_prod: result[0].img_prod,
+            img_prod: process.env.URL_API + result[0].img_prod,
             nm_prod: result[0].nm_prod,
             price_prod: result[0].price_prod,
             qntd_prod: result[0].qntd_prod,
