@@ -8,6 +8,7 @@ exports.getCartOffUser = async (req, res, next) => {
         return res.status(412).send({ warning: 'This user doesn`t have anything on your cart' })
     }else {
         const responsecart = {
+            length: resultcart.length,
             CartItens: resultcart.map(cart => {
                 return {
                     cd_prod: cart.cd_prod,
