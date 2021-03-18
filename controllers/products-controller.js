@@ -18,6 +18,7 @@ exports.getProducts = async (req, res, next) => {
                         size: prods.size,
                         bonusDesc: prods.bonusDesc,
                         cd_cat: prods.cd_cat,
+                        nm_cat: prods.nm_cat,
                         date_prod: prods.date_prod,
                         popular: prods.popular
 
@@ -51,6 +52,7 @@ exports.getProductsByCaterory = async (req, res, next) => {
                         size: prods.size,
                         bonusDesc: prods.bonusDesc,
                         cd_cat: prods.cd_cat,
+                        nm_cat: prods.nm_cat,
                         date_prod: prods.date_prod,
                         popular: prods.popular
                     }
@@ -83,6 +85,7 @@ exports.getProductsByPopular = async (req, res, next) => {
                         size: prods.size,
                         bonusDesc: prods.bonusDesc,
                         cd_cat: prods.cd_cat,
+                        nm_cat: prods.nm_cat,
                         date_prod: prods.date_prod,
                         popular: prods.popular
                 }
@@ -152,6 +155,7 @@ exports.getOneProducts = async (req, res, next) => {
             qntd_prod: result[0].qntd_prod,
             size: result[0].size,
             cd_cat: result[0].cd_cat,
+            nm_cat: result[0].nm_cat,
             date_prod: result[0].date_prod,
             popular: result[0].popular
         });
