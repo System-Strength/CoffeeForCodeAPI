@@ -105,7 +105,7 @@ exports.postProducts = async (req, res, next ) => {
     console.log(req.file);
     let data = new Date();
     var dataFormat = data.toISOString().substring(0, 10);
-    const query = 'INSERT INTO tbl_menu(img_prod, nm_prod, price_prod, qntd_prod, size, bonusDesc, cd_cat, date_prod, popular) VALUES (?,?,?,?,?,?,?,?,?)'
+    const query = 'INSERT INTO tbl_menu(img_prod, nm_prod, price_prod, qntd_prod, size, bonusDesc, cd_cat, nm_cat, date_prod, popular) VALUES (?,?,?,?,?,?,?,?,?,?)'
     const result = await mysql.execute(query, [
         req.file.path,
         req.body.nm_prod,
@@ -114,6 +114,7 @@ exports.postProducts = async (req, res, next ) => {
         req.body.size,
         req.body.bonusDesc,
         req.body.cd_cat,
+        req.body.nm_cat,
         dataFormat,
         req.body.popular
     ])

@@ -50,11 +50,13 @@ create table tbl_menu(
     nm_prod varchar(100) not null,
     price_prod decimal(12, 2) not null,
     qntd_prod int not null,
-    size varchar(110),
+    size varchar(230),
     bonusDesc varchar(210),
     cd_cat int not null,
+    nm_cat varchar(50),
     date_prod date,
-    popular int(1),
+    popular int(1) default 0,
+
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
@@ -145,8 +147,14 @@ select * from tbl_menu;
 select * from tbl_category;
 select * from tbl_shoppingcart;
 
+insert into tbl_shoppingcart(email_user, cd_prod, qt_prod) 
+values ("kauavitorioof@gmail.com"), (14), (1);
+
 delete from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com" and cd_prod = 3;
 select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
+
+update tbl_menu set nm_cat = "Doces" where cd_cat = 84;
+select * from tbl_menu;
 
 
 
