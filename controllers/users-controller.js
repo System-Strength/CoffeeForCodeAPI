@@ -101,15 +101,17 @@ exports.updateAddress = async (req, res, next ) => {
             tbl_account 
         SET 
             address_user = ?, 
-            complement = ? 
+            complement = ?,
+            zipcode = ?
             WHERE 
                 id_user = ?`
-        await mysql.execute(query, [ req.body.address_user, req.body.complement, req.params.id_user ])
+        await mysql.execute(query, [ req.body.address_user, req.body.complement, req.body.zipcode, req.params.id_user ])
         const response = {
             mensagem: 'User updated successfully !!',
             productsUpdated: {
                 address_user: req.body.address_user,
-                complement: req.body.complement
+                complement: req.body.complement,
+                zipcode: req.body.zipcode
             }
         }
         return res.status(202).send(response);
