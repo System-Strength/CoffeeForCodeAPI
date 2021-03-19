@@ -25,6 +25,7 @@ create table tbl_account(
     nm_user varchar(60) not null,
     cpf_user varchar(14) not null,
     phone_user VARCHAR(15) ,
+    zipcode varchar(9),
     address_user varchar(300),
     complement varchar(100),
     img_user varchar(300),
@@ -33,8 +34,7 @@ create table tbl_account(
     partner_Startdate date
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-update tbl_account set img_user = "uploads/user/kauavitorio.jpeg" where id_user = 4;
-
+update tbl_account set address_user = null, complement = null where id_user = 4;
 select * from tbl_account;
 
 create table tbl_category(
@@ -147,14 +147,10 @@ select * from tbl_menu;
 select * from tbl_category;
 select * from tbl_shoppingcart;
 
-insert into tbl_shoppingcart(email_user, cd_prod, qt_prod) 
+insert into tbl_shoppingcart(email_user) 
 values ("kauavitorioof@gmail.com"), (14), (1);
-
-delete from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com" and cd_prod = 3;
+delete from tbl_shoppingcart where email_user = "kauavitoriomine@gmail.com" and cd_prod = 4;
 select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
-
-update tbl_menu set nm_cat = "Doces" where cd_cat = 84;
 select * from tbl_menu;
-
 
 

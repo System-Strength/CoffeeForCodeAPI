@@ -130,12 +130,13 @@ exports.updateUser = async (req, res, next ) => {
         nm_user = ?, 
         cpf_user = ?,
         phone_user = ?, 
+        zipcode = ?,
         address_user = ?, 
         complement = ?
             WHERE 
                 id_user = ?`
         await mysql.execute(query, [ req.body.nm_user, req.body.cpf_user, req.body.phone_user, 
-            req.body.address_user, req.body.complement, req.params.id_user ])
+            req.body.zipcode, req.body.address_user, req.body.complement, req.params.id_user ])
         const response = {
             nm_user: req.body.nm_user,
             cpf_user: req.body.cpf_user,
