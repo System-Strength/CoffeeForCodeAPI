@@ -50,6 +50,7 @@ exports.UserLogin = async (req, res, next) => {
                     email: results[0].email,
                     nm_user: results[0].nm_user,
                     phone_user: results[0].phone_user,
+                    zipcode: results[0].zipcode,
                     address_user: results[0].address_user,
                     complement: results[0].complement,
                     img_user: results[0].img_user,
@@ -109,6 +110,7 @@ exports.updateAddress = async (req, res, next ) => {
         const response = {
             mensagem: 'User updated successfully !!',
             productsUpdated: {
+                zipcode: req.body.zipcode,
                 address_user: req.body.address_user,
                 complement: req.body.complement,
                 zipcode: req.body.zipcode
