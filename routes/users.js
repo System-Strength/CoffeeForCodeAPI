@@ -38,6 +38,8 @@ router.get('/login/:email/:password', UsersController.UserLogin);
 
 router.patch('/updateaddress/:id_user', UsersController.updateAddress)
 
+router.patch('/updateimg/:id_user', UsersController.UpdateImg)
+
 //  Get Informatio nof user
 router.get('/info/:email', UsersController.InfoUser);
 

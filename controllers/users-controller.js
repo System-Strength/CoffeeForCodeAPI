@@ -95,6 +95,28 @@ exports.InfoUser = async (req, res, next) => {
     }
 };
 
+exports.UpdateImg = async (req, res, next) => {
+    try {
+        const query = `
+        UPDATE 
+            tbl_account 
+        SET 
+            img_user = ?
+            WHERE 
+                id_user = ?`
+        await mysql.execute(query, [ req.body.img_user, req.params.id_user ])
+        const response = {
+            mensagem: 'Image User updated successfully !!',
+            productsUpdated: {
+                img_user: req.body.img_user
+            }
+        }
+        return res.status(202).send(response);
+    } catch (error) {
+        return res.status(500).send({ error: error });
+    }
+}
+
 exports.updateAddress = async (req, res, next ) => {
     try {
         const query = `
