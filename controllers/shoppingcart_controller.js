@@ -13,6 +13,8 @@ exports.getCartOffUser = async (req, res, next) => {
                 return {
                     cd_prod: cart.cd_prod,
                     qt_prod: cart.qt_prod,
+                    price_unit_prod: cart.price_unit_prod,
+                    full_price_prod: cart.full_price_prod,
         }
     })
     }
@@ -34,12 +36,15 @@ exports.postIntenOnCart = async (req, res, next ) => {
             return res.status(409).send({error: 'Just have this product on your cart'})
         }else{
             //  Insert products on user cart
-            const query = 'INSERT INTO tbl_shoppingcart(email_user, cd_prod, qt_prod) VALUES (?,?,?)'
-            const result = await mysql.execute(query, [ req.params.email_user, req.params.cd_prod, req.params.qt_prod ])
+            const query = 'INSERT INTO tbl_shoppingcart(email_user, cd_prod, qt_prod, price_unit_prod, full_price_prod) VALUES (?,?,?,?,?)'
+            const result = await mysql.execute(query, [ req.params.email_user, req.params.cd_prod, req.params.qt_prod, 
+                req.params.price_unit_prod, req.params.full_price_prod ])
             return res.status(201).send({
                 email_user: result.email_user,
                 cd_prod: req.params.cd_prod,
-                qt_prod: req.params.qt_prod
+                qt_prod: req.params.qt_prod,
+                price_unit_prod: req.params.price_unit_prod,
+                full_price_prod: req.params.full_price_prod
             });
         }
     } catch (error) {

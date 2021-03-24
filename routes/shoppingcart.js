@@ -4,7 +4,7 @@ const ShoppingCartController = require('../controllers/shoppingcart_controller')
 
 router.get('/:email_user', ShoppingCartController.getCartOffUser);
 
-router.post('/insert/:email_user/:cd_prod/:qt_prod', ShoppingCartController.postIntenOnCart)
+router.post('/insert/:email_user/:cd_prod/:qt_prod/:price_unit_prod/:full_price_prod', ShoppingCartController.postIntenOnCart)
 
 
 router.patch('/updatecart/:email_user/:cd_prod/:qt_prod', ShoppingCartController.patchItenCard)

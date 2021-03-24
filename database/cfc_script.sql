@@ -29,11 +29,10 @@ create table tbl_account(
     address_user varchar(300),
     complement varchar(100),
     img_user varchar(300),
-    password varchar(256) not null,
+    password varchar(356) not null,
     partner int(1) DEFAULT 0,
     partner_Startdate date
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-
 update tbl_account set address_user = null, complement = null where id_user = 4;
 select * from tbl_account;
 
@@ -46,7 +45,7 @@ create table tbl_category(
 
 create table tbl_menu(
     cd_prod int primary key auto_increment,
-    img_prod varchar(100) not null,
+    img_prod varchar(200) not null,
     nm_prod varchar(100) not null,
     price_prod decimal(12, 2) not null,
     qntd_prod int not null,
@@ -59,7 +58,6 @@ create table tbl_menu(
 
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-
 
 update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
 update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
@@ -79,6 +77,8 @@ create table tbl_shoppingcart(
     email_user varchar(256) not null,
     cd_prod int not null,
     qt_prod int not null,
+    price_unit_prod float not null,
+    full_price_prod float not null,
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
@@ -130,27 +130,14 @@ create table tbl_partners(
 ); */
 
 /******************** Inserts ********************/
-insert into tbl_category (nm_cat) values ("Café");
-insert into tbl_category (nm_cat) values ("Chocolate");
-insert into tbl_category (nm_cat) values ("MilkShake");
-insert into tbl_category (nm_cat) values ("Sanduíche");
-insert into tbl_category (nm_cat) values ("Cookies");
-insert into tbl_category (nm_cat) values ("Hambúrguer");
-update tbl_account set address_user = null, complement = null where id_user = 4; 
 insert into tbl_account (email, nm_user, cpf_user, password) values ("kauavitorioof@gmail.com", "Kauã Vitorio", "433.000.000-01", "@!Kaua2004");
 insert into tbl_account (email, nm_user, cpf_user, password) values ("yuridantaass@gmail.com", "Yuri Dantas", "000.000.000-01", "Yuridantas17");
-
+update tbl_account set nm_user = "Viruto Jones" where id_user = 64;
 /******************** Selects  ********************/
 select * from tbl_account;
 select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
 select * from tbl_shoppingcart;
-
-insert into tbl_shoppingcart(email_user) 
-values ("kauavitorioof@gmail.com"), (14), (1);
-delete from tbl_shoppingcart where email_user = "kauavitoriomine@gmail.com" and cd_prod = 4;
-select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
-select * from tbl_menu;
 
 
