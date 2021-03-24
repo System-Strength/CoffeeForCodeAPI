@@ -14,9 +14,9 @@ exports.getCartOffUser = async (req, res, next) => {
                     cd_prod: cart.cd_prod,
                     nm_prod: cart.nm_prod,
                     img_prod: cart.img_prod,
-                    qt_prod: cart.qt_prod,
-                    price_unit_prod: cart.price_unit_prod,
-                    full_price_prod: cart.full_price_prod,
+                    qt_prod: parseInt(cart.qt_prod),
+                    price_unit_prod: parseFloat(cart.price_unit_prod),
+                    full_price_prod: parseFloat(cart.full_price_prod),
         }
     })
     }
