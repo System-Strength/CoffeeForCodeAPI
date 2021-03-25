@@ -60,7 +60,7 @@ exports.patchItenCard = async (req, res, next) => {
         const queryHave = 'SELECT * FROM tbl_shoppingcart WHERE email_user = ? and cd_prod = ?;'
         const resultHaveOnCart = await mysql.execute(queryHave, [req.params.email_user, req.params.cd_prod])
         if(resultHaveOnCart.length > 0){
-            const query = `UPDATE tbl_shoppingcart SET full_price_prod = ?, qt_prod?
+            const query = `UPDATE tbl_shoppingcart SET full_price_prod = ?, qt_prod = ?
                                                                 WHERE email_user = ? and cd_prod = ? `
         await mysql.execute(query, [ req.params.full_price_prod, req.params.qt_prod, req.params.email_user, req.params.cd_prod ])
         const response = {
