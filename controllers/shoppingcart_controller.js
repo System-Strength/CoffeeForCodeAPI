@@ -59,15 +59,16 @@ exports.patchItenCard = async (req, res, next) => {
         //  Verify if have same product on user cart
         const queryHave = 'SELECT * FROM tbl_shoppingcart WHERE email_user = ? and cd_prod = ?;'
         const resultHaveOnCart = await mysql.execute(queryHave, [req.params.email_user, req.params.cd_prod])
-        if(resultHaveOnCart.length > 0){const query = `UPDATE tbl_shoppingcart SET qt_prod = ?
+        if(resultHaveOnCart.length > 0){
+            const query = `UPDATE tbl_shoppingcart SET full_prod_price = ?
                                                                 WHERE email_user = ? and cd_prod = ? `
-        await mysql.execute(query, [ req.params.qt_prod, req.params.email_user, req.params.cd_prod ])
+        await mysql.execute(query, [ req.params.full_prod_price, req.params.email_user, req.params.cd_prod ])
         const response = {
             mensagem: 'Cart updated successfully !!',
             productsUpdated: {
                 email_user: req.params.email_user,
                 cd_prod: req.params.cd_prod,
-                qt_prod: req.params.qt_prod,
+                full_prod_price: req.params.full_prod_price,
             }
         }
         return res.status(202).send(response);
