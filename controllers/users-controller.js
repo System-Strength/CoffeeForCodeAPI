@@ -80,11 +80,12 @@ exports.InfoUser = async (req, res, next) => {
                 id_user: results[0].id_user,
                 email: results[0].email,
                 nm_user: results[0].nm_user,
+                cpf_user: results[0].cpf_user,
                 phone_user: results[0].phone_user,
+                zipcode: results[0].zipcode,
                 address_user: results[0].address_user,
                 complement: results[0].complement,
                 img_user: results[0].img_user,
-                cpf_user: results[0].cpf_user,
                 partner: results[0].partner,
                 partner_Startdate: results[0].partner_Startdate
             });
