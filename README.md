@@ -1,4 +1,7 @@
 # CoffeeForCodeAPI
+
+# Beta Table
+
 <table>
   <thead>
     <tr>
