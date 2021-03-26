@@ -22,7 +22,7 @@ use db_cfc;
 create table tbl_account(
     id_user int primary key auto_increment,
     email varchar(256) not null,
-    nm_user varchar(60) not null,
+    nm_user varchar(100) not null,
     cpf_user varchar(14) not null,
     phone_user VARCHAR(15) ,
     zipcode varchar(9),
@@ -33,8 +33,6 @@ create table tbl_account(
     partner int(1) DEFAULT 0,
     partner_Startdate date
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-update tbl_account set address_user = null, complement = null where id_user = 4;
-select * from tbl_account;
 
 create table tbl_category(
     cd_cat int primary key auto_increment,
@@ -74,8 +72,11 @@ select * from tbl_menu;
 DROP table tbl_menu;
 
 create table tbl_shoppingcart(
+	id_user int(1) not null,
     email_user varchar(256) not null,
     cd_prod int not null,
+    nm_prod varchar(100) not null,
+    img_prod varchar(200) not null,
     qt_prod int not null,
     price_unit_prod float not null,
     full_price_prod float not null,
@@ -89,6 +90,16 @@ create table tbl_purchase(
     HomeNumber_user varchar(40),
     apt_block_user varchar(10),
     PayFormat_user varchar(20) not null
+)DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+
+create table tbl_cards(
+	cd_card int primary key auto_increment,
+    email_user varchar(256) not null,
+    flag_card varchar(50) not null,
+    number_card varchar(19) not null,
+    shelflife_card varchar(5) not null,
+    cvv_card varchar(3) not null,
+    nmUser_card varchar(60) not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
 create table tbl_WorkWithUS(
@@ -139,5 +150,11 @@ select * from tbl_employees;
 select * from tbl_menu;
 select * from tbl_category;
 select * from tbl_shoppingcart;
+select * from tbl_cards;
+
+delete from tbl_shoppingcart where id_user = 4 and email_user = 'kauavitorioof@gmail.com';
+
+update tbl_account set address_user = null where id_user = 34;
+select * from tbl_account where email = "kauavitorioof@gmail.com";
 
 
