@@ -34,7 +34,7 @@ const upload = multer({
 router.post('/register', UsersController.RegisterUsers);
 
 //  Login User
-router.get('/login/:email/:password', UsersController.UserLogin);
+router.get('/login/:email', UsersController.UserLogin);
 
 router.patch('/updateaddress/:id_user', UsersController.updateAddress)
 

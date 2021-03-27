@@ -74,7 +74,7 @@ exports.deleteCard = async (req, res, next) => {
             }
             return res.status(202).send(response);
         }else {
-            return res.status(417).send({ error: 'User don`t have this product on cart' })
+            return res.status(417).send({ error: 'User don`t have this card' })
         }
     } catch (error) {
         return res.status(500).send({ error: error })
