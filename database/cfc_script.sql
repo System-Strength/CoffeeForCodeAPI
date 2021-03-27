@@ -126,19 +126,34 @@ create table tbl_employees(
     phone_employees varchar(15) not null
 ) DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-/*
-create table tbl_partners(
-    cd_parc int not null primary key auto_increment,
-    nm_parc varchar(50) not null,
-    empresa_parc varchar(50) not null,
-    cnpj_parc varchar(17) not null,
-    email_parc varchar(40) not null,
-    site_parc varchar(40),
-    end_parc varchar(50),
-    tel_parc varchar(30) not null,
-    redeSocial_parc varchar(40),
-    descr_parc varchar(2000)
-); */
+create table tbl_versionMobile(
+	cd_version int primary key auto_increment,
+	versionCode int not null,
+    versionName varchar(10) not null
+)DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+insert into tbl_versionMobile set versionCode = 12, versionName = "3.6.8";
+update tbl_versionMobile set versionCode = 13, versionName = "1.1.1" where cd_version = 1;
+
+/******************* Procedures **********************/
+delimiter $$
+drop procedure if exists spUpdate_MobileVS;
+create procedure spUpdate_MobileVS(
+        VversionName varchar(10),
+		VversionCode int,
+        VcdSersion int
+)
+begin
+		update tbl_versionMobile
+        set versionCode = VversionCode,
+        versionName = VversionName
+        where cd_version = VcdSersion;
+        
+end $$
+delimiter ;
+call spUpdate_MobileVS("3.6.7", 11, 1);
+select * from tbl_versionMobile;
+/***************************************************/
+
 
 /******************** Inserts ********************/
 insert into tbl_account (email, nm_user, cpf_user, password) values ("kauavitorioof@gmail.com", "Kauã Vitorio", "433.000.000-01", "@!Kaua2004");
