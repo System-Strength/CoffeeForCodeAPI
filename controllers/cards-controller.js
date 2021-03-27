@@ -61,3 +61,22 @@ exports.postNewCard = async (req, res, next ) => {
         return res.status(500).send({error: error})
     }
 };
+
+exports.deleteCard = async (req, res, next) => {
+    try {
+        const queryNoHave = 'SELECT * FROM tbl_cards WHERE email_user = ? and cd_card = ?;'
+        const resultNoHaveOnCart = await mysql.execute(queryNoHave, [req.params.email_user, req.params.cd_card])
+        if(resultNoHaveOnCart.length > 0){
+            const query = 'DELETE FROM tbl_cards where email_user = ? AND cd_card = ?;'
+            await mysql.execute(query, [req.params.email_user, req.params.cd_card])
+            const response = {
+                mensagem: 'Product successfully removed'
+            }
+            return res.status(202).send(response);
+        }else {
+            return res.status(417).send({ error: 'User don`t have this product on cart' })
+        }
+    } catch (error) {
+        return res.status(500).send({ error: error })
+    }
+}
