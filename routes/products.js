@@ -62,5 +62,4 @@ router.post('/:productId/image', login.required,
 //  Images 
 router.get('/:productId/images', ProductsController.getImages)
 
-
 module.exports = router;

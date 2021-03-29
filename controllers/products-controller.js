@@ -2,7 +2,7 @@ const mysql = require('../mysql');
 
 exports.getProducts = async (req, res, next) => {
     try{
-        const results = await mysql.execute('SELECT * FROM tbl_menu;');
+        const results = await mysql.execute('SELECT * FROM tbl_menu where qntd_prod > 0;');
 
         if (results.length < 1) {
             return res.status(204).send({ message: 'No Products registerd' })
@@ -35,7 +35,7 @@ exports.getProducts = async (req, res, next) => {
 //  Get all products with same Category
 exports.getProductsByCaterory = async (req, res, next) => {
     try{
-        const query = 'SELECT * FROM tbl_menu where cd_cat = ?';
+        const query = 'SELECT * FROM tbl_menu where cd_cat = ? and qntd_prod > 0;';
         var results = await mysql.execute(query, [req.params.cd_cat]);
 
         if (results.length < 1) {
@@ -60,7 +60,6 @@ exports.getProductsByCaterory = async (req, res, next) => {
             }
             return res.status(200).send(response)
         }
-
     }catch (error){
         return res.status(500).send({error: error})
     }
@@ -69,7 +68,7 @@ exports.getProductsByCaterory = async (req, res, next) => {
 //  Get all products with same Category
 exports.getProductsByPopular = async (req, res, next) => {
     try{
-        const results = await mysql.execute('SELECT * FROM tbl_menu WHERE popular = 1;');
+        const results = await mysql.execute('SELECT * FROM tbl_menu WHERE popular = 1 and qntd_prod > 0;');
 
         if (results.length == 0) {
             return res.status(204).send({ message: 'No Products popular' })
