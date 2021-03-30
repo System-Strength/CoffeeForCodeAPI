@@ -88,7 +88,10 @@ exports.postOrder = async (req, res, next) => {
         const QueryRemoveCart = `delete from tbl_shoppingcart where email_user = ?`
         await mysql.execute(QueryRemoveCart, [ req.params.email_user ])
         let date = new Date();
-        var held_in = date.toISOString().substring(0, 10);
+        var day = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+        var held_in = day +'/'+ (month++) +'/'+ year;
         const queryOrder  = `insert into tbl_orders (email_user, zipcode, address_user, complement, cd_prods, PayFormat_user, status, held_in)
         values (?, ?, ?, ?, ?, ?, ?, ?);`
         const resultOrder = await mysql.execute(queryOrder, [req.params.email_user, req.params.zipcode, req.params.address_user, req.params.complement,
