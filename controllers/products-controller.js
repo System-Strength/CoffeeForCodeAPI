@@ -223,6 +223,30 @@ exports.deleteProducts = async (req, res, next ) => {
     }
 }
 
+exports.DoPurchase = async (req, res, next) => {
+    try {
+        const query = 'DELETE FROM products WHERE productId = ?;'
+        await mysql.execute(query, [
+            req.params.productId
+        ]);
+        const response = {
+            mensagem: 'Product successfully removed',
+            request: {
+                tipo: 'POST',
+                descricao: 'Insert a product',
+                url: process.env.URL_API + 'products',
+                body: {
+                    name: 'String',
+                    price: 'Number'
+                }
+            }
+        }
+    return res.status(202).send(response);
+    } catch (error) {
+        return res.status(500).send({error: error})
+    }
+}
+
 exports.getImages = async (req, res, next) => {
     try {
         const query  = "SELECT * FROM productImages WHERE productId = ?;"

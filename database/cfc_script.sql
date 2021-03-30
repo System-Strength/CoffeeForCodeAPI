@@ -40,7 +40,6 @@ create table tbl_category(
     img_cat varchar(50)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-
 create table tbl_menu(
     cd_prod int primary key auto_increment,
     img_prod varchar(200) not null,
@@ -56,12 +55,6 @@ create table tbl_menu(
 
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-
-update tbl_menu set size = "Frappuccino de chocolate\nCroissant e Torada" where cd_prod = 24;
-update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
-update tbl_menu set nm_prod = "Combo happy" where cd_prod = 24;
-update tbl_menu set nm_prod = "Unicornio Frappuccino" where cd_prod = 4;
-update tbl_menu set nm_prod = "Dunkin Donuts" where cd_prod = 14;
 
 update tbl_account set nm_user = "Kauã Vitorio Da Silva Lima" where  id_user = 4;
 
@@ -83,14 +76,19 @@ create table tbl_shoppingcart(
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-create table tbl_purchase(
-    cd_purchase int primary key auto_increment,
-    cpf_user varchar(14), 
-    address_user varchar(50),
-    HomeNumber_user varchar(40),
-    apt_block_user varchar(10),
-    PayFormat_user varchar(20) not null
+create table tbl_orders (
+    cd_order bigint primary key auto_increment,
+    email_user varchar(256) not null REFERENCES tbl_account (email_user),
+    zipcode varchar(9) not null,
+    address_user varchar(300) not null,
+    complement varchar(100),
+    cd_prods varchar(200),
+    PayFormat_user varchar(20) not null,
+    status varchar(50) not null,
+    held_in date not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+ALTER TABLE tbl_orders auto_increment=251649;
+drop table tbl_orders; 
 
 create table tbl_cards(
 	cd_card int primary key auto_increment,
@@ -128,11 +126,12 @@ create table tbl_employees(
 
 create table tbl_versionMobile(
 	cd_version int primary key auto_increment,
-	versionCode int not null,
-    versionName varchar(10) not null
+    versionName varchar(10) not null,
+    versionCode int not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
-insert into tbl_versionMobile set versionCode = 12, versionName = "3.6.8";
-update tbl_versionMobile set versionCode = 13, versionName = "1.1.1" where cd_version = 1;
+insert into tbl_versionMobile (versionCode, versionName) values (14,"3.7.1");
+update tbl_versionMobile set versionCode = 15, versionName = "3.8.5" where cd_version = 4;
+select * from tbl_versionMobile;
 
 /******************* Procedures **********************/
 delimiter $$
@@ -166,10 +165,9 @@ select * from tbl_menu;
 select * from tbl_category;
 select * from tbl_shoppingcart;
 select * from tbl_cards;
+select * from tbl_orders;
 
 delete from tbl_shoppingcart where id_user = 4 and email_user = 'kauavitorioof@gmail.com';
-
-update tbl_account set address_user = null where id_user = 34;
 select * from tbl_account where email = "kauavitorioof@gmail.com";
 
 

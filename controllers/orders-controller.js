@@ -2,67 +2,54 @@ const mysql = require('../mysql');
 
 exports.getOrders = async (req, res, next) => {
     try {
-        const query = `SELECT orders.orderId,
-                            orders.quantity,
-                            products.productId,
-                            products.name,
-                            products.price
-                        FROM orders
-                    INNER JOIN products
-                        ON products.productId = orders.productId;`
-        const result = await mysql.execute(query);
-        const response = {
-            orders: result.map(order => {
-                return {
-                    orderId: order.orderId,
-                    quantity: order.quantity,
-                    product: {
-                        productId: order.productId,
-                        name: order.name,
-                        price: order.price
-                    },
-                    request: {
-                        type: 'GET',
-                        description: 'Retorna os detalhes de um pedido específico',
-                        url: process.env.URL_API + 'orders/' + order.orderId
+        const query = `SELECT * FROM tbl_orders where email_user = ?`
+        const result = await mysql.execute(query, [req.params.email_user] );
+        if(result.length <= 0){
+            return res.status(410).send({ warning: "this user don't have any order" });            
+        }else{
+            const response = {
+                orders: result.map(order => {
+                    return {
+                        cd_orders: parseInt(order.cd_orders),
+                        email_user: order.email_user,
+                        zipcode: order.zipcode,
+                        address_user: order.address_user,
+                        complement: order.complement,
+                        cd_prods: order.PayFocd_prodsrmat_user,
+                        PayFormat_user: order.cd_prods,
+                        status: order.status,
+                        held_in: order.held_in
                     }
-                }
-            })
-        }
-        return res.status(200).send(response);
-        
+                })
+            }
+            return res.status(200).send(response);
+        }        
     } catch (error) {
         return res.status(500).send({ error: error });
     }
 };
 
 exports.postOrder = async (req, res, next) => {
-
-
     try {
-        const queryProduct = 'SELECT * FROM products WHERE productId = ?';
-        const resultProduct = await mysql.execute(queryProduct, [req.body.productId]);
+        /*const queryOrders = 'SELECT * FROM tbl_orders where email_user = ?';
+        const resultOrders = await mysql.execute(queryOrders, [req.params.email_user]);
 
-        if (resultProduct.length == 0) {
+        if (resultOrders.length <= 0) {
             return res.status(404).send({ message: 'Produto não encontrado'});
+        }*/
+        let date = new Date();
+        var held_in = date.toISOString().substring(0, 10);
+        const queryOrder  = `insert into tbl_orders (email_user, zipcode, address_user, complement, cd_prods, PayFormat_user, status, held_in)
+        values (?, ?, ?, ?, ?, ?, ?, ?);`
+        const resultOrder = await mysql.execute(queryOrder, [req.params.email_user, req.params.zipcode, req.params.address_user, req.params.complement,
+            req.params.cd_prods, req.params.PayFormat_user, req.params.status, held_in]);
+            const response = {
+                cd_order: resultOrder.insertId,
+                email_user: req.params.email_user,
+                status: req.params.status,
+                held_in: held_in
         }
-
-        const queryOrder  = 'INSERT INTO orders (productId, quantity) VALUES (?,?)';
-        const resultOrder = await mysql.execute(queryOrder, [req.body.productId, req.body.quantity]);
-
-        const response = {
-            message: 'Pedido inserido com sucesso',
-            createdOrder: {
-                orderId: resultOrder.insertId,
-                productId: req.body.productId,
-                quantity: req.body.quantity,
-                request: {
-                    type: 'GET',
-                    description: 'Retorna todos os pedidos',
-                    url: process.env.URL_API + 'orders'
-                }
-            }
-        }
+        console.log("New order in: " + held_in)
         return res.status(201).send(response);
 
     } catch (error) {
