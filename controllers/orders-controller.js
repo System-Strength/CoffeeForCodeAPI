@@ -16,8 +16,8 @@ exports.getOrders = async (req, res, next) => {
                         zipcode: order.zipcode,
                         address_user: order.address_user,
                         complement: order.complement,
-                        cd_prods: order.PayFocd_prodsrmat_user,
-                        PayFormat_user: order.cd_prods,
+                        cd_prods: order.cd_prods,
+                        PayFormat_user: order.PayFormat_user,
                         status: order.status,
                         held_in: order.held_in
                     }
