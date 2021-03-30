@@ -88,7 +88,7 @@ create table tbl_orders (
     held_in date not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 ALTER TABLE tbl_orders auto_increment=251649;
-drop table tbl_orders; 
+select * from tbl_orders;
 
 create table tbl_cards(
 	cd_card int primary key auto_increment,
