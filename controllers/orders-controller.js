@@ -109,39 +109,6 @@ exports.postOrder = async (req, res, next) => {
     }
 };
 
-exports.test = async (email) => {
-    try {
-        let json;
-        let myArray = [];
-        const query = `SELECT * FROM tbl_shoppingcart where email_user = ?`
-        const result = await mysql.execute(query, [email] );
-        if(result.length <= 0){
-            return res.status(410).send({ warning: "this user don't have any order" });            
-        }else{
-                const orders = result.map(shoppingcart => {
-                    return {
-                        id_user: parseInt(shoppingcart.id_user),
-                        email_user: shoppingcart.email_user,
-                        cd_prod: shoppingcart.cd_prod,
-                        qt_prod: shoppingcart.qt_prod
-                    }
-                })
-            json = JSON.parse(JSON.stringify(orders))
-            for (let i = 0; i < json.length; i++) {
-                myArray.push(json[i].cd_prod);
-            }
-            let myString = myArray.toString();
-            let newArray = myString.trim();
-            console.log(newArray);
-            
-            return newArray
-        }          
-    } catch (error) {
-        console.log("Error " + error);
-        //return res.status(500).send({ error: error });
-    }
-};
-
 exports.getOrderDetail = async (req, res, next)=> {
     try {
         const query = 'SELECT * FROM orders WHERE orderId = ?;';
