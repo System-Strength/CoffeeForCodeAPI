@@ -56,16 +56,15 @@ create table tbl_menu(
     FOREIGN KEY(cd_cat) REFERENCES tbl_category (cd_cat)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 
-update tbl_account set nm_user = "Kauã Vitorio Da Silva Lima" where  id_user = 4;
 
 alter table tbl_menu modify column size varchar(110);
-
+update  tbl_menu set qntd_prod = 150 where cd_prod = 3;
 select * from tbl_menu;
 
 DROP table tbl_menu;
 
 create table tbl_shoppingcart(
-	id_user int(1) not null,
+	id_user int not null,
     email_user varchar(256) not null,
     cd_prod int not null,
     nm_prod varchar(100) not null,
@@ -75,6 +74,11 @@ create table tbl_shoppingcart(
     full_price_prod float not null,
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
+select * from tbl_shoppingcart;
+insert into tbl_shoppingcart (id_user, email_user, cd_prod, nm_prod, img_prod, qt_prod, price_unit_prod, full_price_prod) values (1,"kauavitorioof@gmail.com", 4, "Pao", "aaa", 
+20, 1.20, 80.10);
+select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
+update tbl_shoppingcart set qt_prod = 99 where cd_prod = 3;
 
 create table tbl_orders (
     cd_order bigint primary key auto_increment,

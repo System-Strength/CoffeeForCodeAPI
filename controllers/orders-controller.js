@@ -11,7 +11,7 @@ exports.getOrders = async (req, res, next) => {
             const response = {
                 orders: result.map(order => {
                     return {
-                        cd_orders: parseInt(order.cd_orders),
+                        cd_order: parseInt(order.cd_order),
                         email_user: order.email_user,
                         zipcode: order.zipcode,
                         address_user: order.address_user,
@@ -75,7 +75,7 @@ exports.postOrder = async (req, res, next) => {
                 const resultpt = await mysql.execute(querypt, [ armaCds ] );
                 let qrdAtt =  resultpt[0].qntd_prod;
                 if(qrdAtt <= 0 || armaQtd > qrdAtt){
-                    return res.status(500).send({ error: "Out of stock" });
+                    return res.status(409).send({ error: "Out of stock" });
                 }else{
                     newValue = qrdAtt - armaQtd;
                     await mysql.execute('update  tbl_menu set qntd_prod = '+ newValue +' where cd_prod = ' + armaCds);
