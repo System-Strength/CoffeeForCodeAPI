@@ -128,30 +128,29 @@ exports.postOrder = async (req, res, next) => {
     }
 };
 
-exports.getOrderDetail = async (req, res, next)=> {
+exports.patchOrderStatus = async (req, res, next)=> {
+    console.log("Chegou aqui")
     try {
-        const query = 'SELECT * FROM orders WHERE orderId = ?;';
-        const result = await mysql.execute(query, [req.params.orderId]);
+        const query = 'SELECT * FROM tbl_orders WHERE cd_order = ?;';
+        const result = await mysql.execute(query, [req.params.cd_order]);
 
         if (result.length == 0) {
-            return res.status(404).send({
-                message: 'Não foi encontrado pedido com este ID'
+            return res.status(304).send({
+                message: 'Order not found'
             })
-        }
+        }else{
+            const query = `UPDATE tbl_orders
+        SET status = ?
+                WHERE cd_order = ?`
+        await mysql.execute(query, [ req.params.status, parseInt(req.params.cd_order) ])
         const response = {
-            order: {
-                orderId: result[0].orderId,
-                productId: result[0].productId,
-                quantity: result[0].quantity,
-                request: {
-                    type: 'GET',
-                    description: 'Retorna todos os pedidos',
-                    url: process.env.URL_API + 'orders'
-                }
-            }
+            cd_order: req.params.cd_order,
+            email_user: result[0].email_user,
+            held_in: result[0].held_in,
+            status: req.params.status,
         }
-        return res.status(200).send(response);
-
+        return res.status(202).send(response);
+        }
     } catch (error) {
         return res.status(500).send({ error: error });
     }

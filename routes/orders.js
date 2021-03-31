@@ -6,10 +6,9 @@ const OrdersControler = require('../controllers/orders-controller');
 router.get('/:email_user', OrdersControler.getOrders);
 
 // Insere um pedidos
-router.post('/insert/:email_user/:zipcode/:address_user/:complement/:cd_prods/:PayFormat_user/:status', OrdersControler.postOrder);
+router.post('/insert/:email_user/:zipcode/:address_user/:complement/:PayFormat_user/:status', OrdersControler.postOrder);
 
-// Retona os dados de 1 pedido
-router.get('/:orderId', OrdersControler.getOrderDetail );
+router.patch('/update/:cd_order/:status', OrdersControler.patchOrderStatus)
 
 //  Exclui um pedido
 router.delete('/:orderId', OrdersControler.deleteOrder);
