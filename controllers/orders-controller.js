@@ -174,7 +174,8 @@ exports.getOrderByCd = async (req, res, next) => {
                         cd_prods: result[0].cd_prods,
                         PayFormat_user: result[0].PayFormat_user,
                         status: result[0].status,
-                        held_in: result[0].held_in
+                        held_in: result[0].held_in,
+                        delivery_time: result[0].delivery_time
             }
             return res.status(200).send(response);
     } 
