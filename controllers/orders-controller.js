@@ -156,26 +156,28 @@ exports.patchOrderStatus = async (req, res, next)=> {
     }
 };
 
-exports.deleteOrder = async (req, res, next) => {
+exports.getOrderByCd = async (req, res, next) => {
     try {
-        const query = `DELETE FROM orders WHERE orderId = ?`;
-        await mysql.execute(query, [req.params.orderId]);
-
-        const response = {
-            message: 'Pedido removido com sucesso',
-            request: {
-                type: 'POST',
-                description: 'Insere um pedido',
-                url: process.env.URL_API + 'orders',
-                body: {
-                    productId: 'Number',
-                    quantity: 'Number'
-                }
+        const query = `SELECT * FROM tbl_orders where cd_order = ?`
+        const result = await mysql.execute(query, [req.params.cd_order] );
+        if(result.length <= 0){
+            return res.status(410).send({ warning: "this user don't have this order" });            
+        }else{
+            const response ={
+                cd_order: parseInt(result[0].cd_order),
+                        email_user: result[0].email_user,
+                        zipcode: result[0].zipcode,
+                        address_user: result[0].address_user,
+                        complement: result[0].complement,
+                        cd_prods: result[0].cd_prods,
+                        PayFormat_user: result[0].PayFormat_user,
+                        status: result[0].status,
+                        held_in: result[0].held_in
             }
-        }
-        return res.status(202).send(response);
+            return res.status(200).send(response);
+    } 
 
-    } catch (error) {
+    }catch (error) {
         return res.status(500).send({ error: error });
     }
 };

@@ -11,7 +11,7 @@ router.post('/insert/:email_user/:zipcode/:address_user/:complement/:PayFormat_u
 router.patch('/update/:cd_order/:status', OrdersControler.patchOrderStatus)
 
 //  Exclui um pedido
-router.delete('/:orderId', OrdersControler.deleteOrder);
+router.get('/cd/:cd_order', OrdersControler.getOrderByCd);
 
 
 module.exports = router;
