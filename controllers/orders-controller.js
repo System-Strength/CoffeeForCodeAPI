@@ -9,6 +9,7 @@ exports.getOrders = async (req, res, next) => {
             return res.status(410).send({ warning: "this user don't have any order" });            
         }else{
             const response = {
+                length: result.length,
                 orders: result.map(order => {
                     return {
                         cd_order: parseInt(order.cd_order),

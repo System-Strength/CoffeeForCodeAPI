@@ -174,4 +174,12 @@ select * from tbl_orders;
 delete from tbl_shoppingcart where id_user = 4 and email_user = 'kauavitorioof@gmail.com';
 select * from tbl_account where email = "kauavitorioof@gmail.com";
 
+/*	 Order Status
+*	Pendente
+*	Em preparo
+*	Entregador à caminho
+*	Entregue
+*	Concluido
+*/
+
 
