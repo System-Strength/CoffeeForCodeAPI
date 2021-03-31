@@ -75,9 +75,6 @@ create table tbl_shoppingcart(
     FOREIGN KEY(cd_prod) REFERENCES tbl_menu (cd_prod)
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 select * from tbl_shoppingcart;
-insert into tbl_shoppingcart (id_user, email_user, cd_prod, nm_prod, img_prod, qt_prod, price_unit_prod, full_price_prod) values (1,"kauavitorioof@gmail.com", 4, "Pao", "aaa", 
-20, 1.20, 80.10);
-select * from tbl_shoppingcart where email_user = "kauavitorioof@gmail.com";
 update tbl_shoppingcart set qt_prod = 99 where cd_prod = 3;
 
 create table tbl_orders (
@@ -89,10 +86,11 @@ create table tbl_orders (
     cd_prods varchar(200),
     PayFormat_user varchar(20) not null,
     status varchar(50) not null,
-    held_in date not null
+    held_in varchar(11) not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 ALTER TABLE tbl_orders auto_increment=251649;
 select * from tbl_orders;
+drop table tbl_orders;
 
 create table tbl_cards(
 	cd_card int primary key auto_increment,
@@ -134,7 +132,7 @@ create table tbl_versionMobile(
     versionCode int not null
 )DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci;
 insert into tbl_versionMobile (versionCode, versionName) values (14,"3.7.1");
-update tbl_versionMobile set versionCode = 15, versionName = "3.8.5" where cd_version = 4;
+update tbl_versionMobile set versionCode = 16, versionName = "3.9.2" where cd_version = 4;
 select * from tbl_versionMobile;
 
 /******************* Procedures **********************/
@@ -179,7 +177,7 @@ select * from tbl_account where email = "kauavitorioof@gmail.com";
 *	Em preparo
 *	Entregador à caminho
 *	Entregue
-*	Concluido
+*	Concluído
 */
 
 

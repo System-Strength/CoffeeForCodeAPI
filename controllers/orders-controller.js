@@ -20,7 +20,8 @@ exports.getOrders = async (req, res, next) => {
                         cd_prods: order.cd_prods,
                         PayFormat_user: order.PayFormat_user,
                         status: order.status,
-                        held_in: order.held_in
+                        held_in: order.held_in,
+                        delivery_time: order.delivery_time
                     }
                 })
             }
